@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+project/ecf3/genshin_android_app/BuildConfig.java
+ project.ecf3.genshin_android_app.BuildConfig
