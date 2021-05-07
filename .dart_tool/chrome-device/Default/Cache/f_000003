@@ -19,15 +19,15 @@ define("main_module.bootstrap", ["web_entrypoint.dart", "dart_sdk"], function(ap
          main();
       });
     }
-    window.$dartAppId = "CrzkkGan1FPnT/J637ImeA==";
+    window.$dartAppId = "NAxaNcOxxqYGm+8a7trMrw==";
 window.$dartReloadConfiguration = "ReloadConfiguration.none";
 window.$dartModuleStrategy = "require-js";
 window.$loadModuleConfig = require;
 window.$dwdsVersion = "7.1.1";
-window.$dwdsDevHandlerPath = "http://localhost:53321/$dwdsSseHandler";
+window.$dwdsDevHandlerPath = "http://localhost:55086/$dwdsSseHandler";
 window.$dartEntrypointPath = "main_module.bootstrap.js";
 window.$requireLoader.forceLoadModule("dwds/src/injected/client");
-window.$dartExtensionUri = "http://127.0.0.1:53323/$debug";
+window.$dartExtensionUri = "http://127.0.0.1:55088/$debug";
 
   } else {
     if(window.$dartMainExecuted){
@@ -82,7 +82,11 @@ var baseUrl = (function () {
 let modulePaths = {
  "web_entrypoint.dart": "web_entrypoint.dart.lib",
  "packages/genshin_android_app/main.dart": "packages/genshin_android_app/main.dart.lib",
- "packages/genshin_android_app/model/apigenshin.dart": "packages/genshin_android_app/model/apigenshin.dart.lib",
+ "packages/genshin_android_app/views/secondStep.dart": "packages/genshin_android_app/views/secondStep.dart.lib",
+ "packages/genshin_android_app/controller/firstStepController.dart": "packages/genshin_android_app/controller/firstStepController.dart.lib",
+ "packages/genshin_android_app/globals.dart": "packages/genshin_android_app/globals.dart.lib",
+ "packages/genshin_android_app/models/Personnage.dart": "packages/genshin_android_app/models/Personnage.dart.lib",
+ "packages/genshin_android_app/models/Elements.dart": "packages/genshin_android_app/models/Elements.dart.lib",
  "packages/http/http.dart": "packages/http/http.dart.lib",
  "packages/http/src/browser_client.dart": "packages/http/src/browser_client.dart.lib",
  "packages/http/src/utils.dart": "packages/http/src/utils.dart.lib",
@@ -142,6 +146,7 @@ let modulePaths = {
  "packages/http/src/multipart_request.dart": "packages/http/src/multipart_request.dart.lib",
  "packages/http/src/multipart_file_stub.dart": "packages/http/src/multipart_file_stub.dart.lib",
  "packages/http/src/boundary_characters.dart": "packages/http/src/boundary_characters.dart.lib",
+ "packages/genshin_android_app/models/ArmeType.dart": "packages/genshin_android_app/models/ArmeType.dart.lib",
  "packages/flutter/material.dart": "packages/flutter/material.dart.lib",
  "packages/flutter/widgets.dart": "packages/flutter/widgets.dart.lib",
  "packages/flutter/src/widgets/will_pop_scope.dart": "packages/flutter/src/widgets/will_pop_scope.dart.lib",
@@ -479,12 +484,17 @@ let modulePaths = {
  "packages/flutter/src/material/arc.dart": "packages/flutter/src/material/arc.dart.lib",
  "packages/flutter/src/material/app.dart": "packages/flutter/src/material/app.dart.lib",
  "packages/flutter/src/material/animated_icons.dart": "packages/flutter/src/material/animated_icons.dart.lib",
- "packages/flutter/src/material/about.dart": "packages/flutter/src/material/about.dart.lib"
+ "packages/flutter/src/material/about.dart": "packages/flutter/src/material/about.dart.lib",
+ "packages/genshin_android_app/views/firstStep.dart": "packages/genshin_android_app/views/firstStep.dart.lib"
 };
 let moduleNames = {
  "web_entrypoint.dart.lib": "web_entrypoint.dart",
  "packages/genshin_android_app/main.dart.lib": "packages/genshin_android_app/main.dart",
- "packages/genshin_android_app/model/apigenshin.dart.lib": "packages/genshin_android_app/model/apigenshin.dart",
+ "packages/genshin_android_app/views/secondStep.dart.lib": "packages/genshin_android_app/views/secondStep.dart",
+ "packages/genshin_android_app/controller/firstStepController.dart.lib": "packages/genshin_android_app/controller/firstStepController.dart",
+ "packages/genshin_android_app/globals.dart.lib": "packages/genshin_android_app/globals.dart",
+ "packages/genshin_android_app/models/Personnage.dart.lib": "packages/genshin_android_app/models/Personnage.dart",
+ "packages/genshin_android_app/models/Elements.dart.lib": "packages/genshin_android_app/models/Elements.dart",
  "packages/http/http.dart.lib": "packages/http/http.dart",
  "packages/http/src/browser_client.dart.lib": "packages/http/src/browser_client.dart",
  "packages/http/src/utils.dart.lib": "packages/http/src/utils.dart",
@@ -544,6 +554,7 @@ let moduleNames = {
  "packages/http/src/multipart_request.dart.lib": "packages/http/src/multipart_request.dart",
  "packages/http/src/multipart_file_stub.dart.lib": "packages/http/src/multipart_file_stub.dart",
  "packages/http/src/boundary_characters.dart.lib": "packages/http/src/boundary_characters.dart",
+ "packages/genshin_android_app/models/ArmeType.dart.lib": "packages/genshin_android_app/models/ArmeType.dart",
  "packages/flutter/material.dart.lib": "packages/flutter/material.dart",
  "packages/flutter/widgets.dart.lib": "packages/flutter/widgets.dart",
  "packages/flutter/src/widgets/will_pop_scope.dart.lib": "packages/flutter/src/widgets/will_pop_scope.dart",
@@ -881,7 +892,8 @@ let moduleNames = {
  "packages/flutter/src/material/arc.dart.lib": "packages/flutter/src/material/arc.dart",
  "packages/flutter/src/material/app.dart.lib": "packages/flutter/src/material/app.dart",
  "packages/flutter/src/material/animated_icons.dart.lib": "packages/flutter/src/material/animated_icons.dart",
- "packages/flutter/src/material/about.dart.lib": "packages/flutter/src/material/about.dart"
+ "packages/flutter/src/material/about.dart.lib": "packages/flutter/src/material/about.dart",
+ "packages/genshin_android_app/views/firstStep.dart.lib": "packages/genshin_android_app/views/firstStep.dart"
 };
 if(!window.$requireLoader) {
    window.$requireLoader = {

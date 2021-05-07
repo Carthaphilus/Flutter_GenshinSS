@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 import 'package:genshin_android_app/views/firstStep.dart';
+import 'package:genshin_android_app/views/secondStep.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: fistStepPage(),
+      home: secondStepPage(),
     );
   }
 }

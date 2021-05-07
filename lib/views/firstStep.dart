@@ -25,7 +25,7 @@ class _fisrtStepPageState extends State<fistStepPage> {
               if (snapshot.connectionState == ConnectionState.done) {
                 return DropdownButton(
                   items: firstStepController.buildDropDownMenuItems(snapshot.data),
-                  value: firstStepController.selectedPersonnage.nom,
+                  value: firstStepController.selectedPersonnage,
                   onChanged: (newVal){
                     firstStepController.selectedPersonnage = newVal;
                   },

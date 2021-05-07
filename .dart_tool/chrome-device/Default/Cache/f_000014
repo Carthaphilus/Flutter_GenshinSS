@@ -1,42 +1,55 @@
-define(['dart_sdk', 'packages/flutter/src/foundation/object.dart', 'packages/flutter/src/painting/edge_insets.dart', 'packages/flutter/src/foundation/collections.dart'], (function load__packages__flutter__src__painting__borders_dart(dart_sdk, packages__flutter__src__foundation__object$46dart, packages__flutter__src__painting__edge_insets$46dart, packages__flutter__src__foundation__collections$46dart) {
+define(['dart_sdk', 'packages/flutter/src/foundation/debug.dart', 'packages/flutter/src/painting/strut_style.dart', 'packages/flutter/src/gestures/tap.dart', 'packages/flutter/src/gestures/long_press.dart', 'packages/flutter/src/painting/basic_types.dart', 'packages/flutter/src/foundation/collections.dart', 'packages/flutter/src/foundation/object.dart', 'packages/flutter/src/gestures/recognizer.dart', 'packages/flutter/src/services/text_editing.dart'], (function load__packages__flutter__src__painting__placeholder_span_dart(dart_sdk, packages__flutter__src__foundation__debug$46dart, packages__flutter__src__painting__strut_style$46dart, packages__flutter__src__gestures__tap$46dart, packages__flutter__src__gestures__long_press$46dart, packages__flutter__src__painting__basic_types$46dart, packages__flutter__src__foundation__collections$46dart, packages__flutter__src__foundation__object$46dart, packages__flutter__src__gestures__recognizer$46dart, packages__flutter__src__services__text_editing$46dart) {
   'use strict';
   const core = dart_sdk.core;
   const ui = dart_sdk.ui;
-  const math = dart_sdk.math;
-  const _internal = dart_sdk._internal;
   const _interceptors = dart_sdk._interceptors;
+  const _internal = dart_sdk._internal;
+  const math = dart_sdk.math;
   const dart = dart_sdk.dart;
   const dartx = dart_sdk.dartx;
-  const object = packages__flutter__src__foundation__object$46dart.src__foundation__object;
-  const edge_insets = packages__flutter__src__painting__edge_insets$46dart.src__painting__edge_insets;
+  const diagnostics = packages__flutter__src__foundation__debug$46dart.src__foundation__diagnostics;
+  const assertions = packages__flutter__src__foundation__debug$46dart.src__foundation__assertions;
+  const text_style = packages__flutter__src__painting__strut_style$46dart.src__painting__text_style;
+  const strut_style = packages__flutter__src__painting__strut_style$46dart.src__painting__strut_style;
+  const tap = packages__flutter__src__gestures__tap$46dart.src__gestures__tap;
+  const long_press = packages__flutter__src__gestures__long_press$46dart.src__gestures__long_press;
+  const basic_types = packages__flutter__src__painting__basic_types$46dart.src__painting__basic_types;
   const collections = packages__flutter__src__foundation__collections$46dart.src__foundation__collections;
-  var borders$ = Object.create(dart.library);
-  var $runtimeType = dartx.runtimeType;
-  var $toStringAsFixed = dartx.toStringAsFixed;
-  var $length = dartx.length;
-  var $any = dartx.any;
-  var $fold = dartx.fold;
-  var $last = dartx.last;
-  var $first = dartx.first;
-  var $_set = dartx._set;
-  var $addAll = dartx.addAll;
+  const object = packages__flutter__src__foundation__object$46dart.src__foundation__object;
+  const recognizer = packages__flutter__src__gestures__recognizer$46dart.src__gestures__recognizer;
+  const text_editing = packages__flutter__src__services__text_editing$46dart.src__services__text_editing;
+  var placeholder_span = Object.create(dart.library);
+  var text_span = Object.create(dart.library);
+  var inline_span = Object.create(dart.library);
+  var text_painter = Object.create(dart.library);
   var $add = dartx.add;
+  var $runtimeType = dartx.runtimeType;
+  var $hashCode = dartx.hashCode;
+  var $codeUnitAt = dartx.codeUnitAt;
+  var $length = dartx.length;
+  var $_get = dartx._get;
   var $map = dartx.map;
   var $toList = dartx.toList;
-  var $_get = dartx._get;
-  var $reversed = dartx.reversed;
-  var $join = dartx.join;
+  var $isNotEmpty = dartx.isNotEmpty;
+  var $isEmpty = dartx.isEmpty;
+  var $ceilToDouble = dartx.ceilToDouble;
+  var $clamp = dartx.clamp;
+  var $first = dartx.first;
+  var $last = dartx.last;
   dart._checkModuleNullSafetyMode(false);
   var T = {
-    BorderStyleL: () => (T.BorderStyleL = dart.constFn(dart.legacy(borders$.BorderStyle)))(),
-    JSArrayOfShapeBorder: () => (T.JSArrayOfShapeBorder = dart.constFn(_interceptors.JSArray$(borders$.ShapeBorder)))(),
-    ShapeBorderTobool: () => (T.ShapeBorderTobool = dart.constFn(dart.fnType(core.bool, [borders$.ShapeBorder])))(),
-    EdgeInsetsGeometryAndShapeBorderToEdgeInsetsGeometry: () => (T.EdgeInsetsGeometryAndShapeBorderToEdgeInsetsGeometry = dart.constFn(dart.fnType(edge_insets.EdgeInsetsGeometry, [edge_insets.EdgeInsetsGeometry, borders$.ShapeBorder])))(),
-    ListOfShapeBorder: () => (T.ListOfShapeBorder = dart.constFn(core.List$(borders$.ShapeBorder)))(),
-    ShapeBorderToShapeBorder: () => (T.ShapeBorderToShapeBorder = dart.constFn(dart.fnType(borders$.ShapeBorder, [borders$.ShapeBorder])))(),
-    ShapeBorderN: () => (T.ShapeBorderN = dart.constFn(dart.nullable(borders$.ShapeBorder)))(),
-    JSArrayOfShapeBorderN: () => (T.JSArrayOfShapeBorderN = dart.constFn(_interceptors.JSArray$(T.ShapeBorderN())))(),
-    ShapeBorderToString: () => (T.ShapeBorderToString = dart.constFn(dart.fnType(core.String, [borders$.ShapeBorder])))()
+    EnumPropertyOfPlaceholderAlignment: () => (T.EnumPropertyOfPlaceholderAlignment = dart.constFn(diagnostics.EnumProperty$(ui.PlaceholderAlignment)))(),
+    EnumPropertyOfTextBaseline: () => (T.EnumPropertyOfTextBaseline = dart.constFn(diagnostics.EnumProperty$(ui.TextBaseline)))(),
+    InlineSpanTobool: () => (T.InlineSpanTobool = dart.constFn(dart.fnType(core.bool, [inline_span.InlineSpan])))(),
+    JSArrayOfInlineSpanSemanticsInformation: () => (T.JSArrayOfInlineSpanSemanticsInformation = dart.constFn(_interceptors.JSArray$(inline_span.InlineSpanSemanticsInformation)))(),
+    JSArrayOfDiagnosticsNode: () => (T.JSArrayOfDiagnosticsNode = dart.constFn(_interceptors.JSArray$(diagnostics.DiagnosticsNode)))(),
+    VoidTobool: () => (T.VoidTobool = dart.constFn(dart.fnType(core.bool, [])))(),
+    DiagnosticsPropertyOfGestureRecognizer: () => (T.DiagnosticsPropertyOfGestureRecognizer = dart.constFn(diagnostics.DiagnosticsProperty$(recognizer.GestureRecognizer)))(),
+    DiagnosticsNodeL: () => (T.DiagnosticsNodeL = dart.constFn(dart.legacy(diagnostics.DiagnosticsNode)))(),
+    InlineSpanToDiagnosticsNode: () => (T.InlineSpanToDiagnosticsNode = dart.constFn(dart.fnType(diagnostics.DiagnosticsNode, [inline_span.InlineSpan])))(),
+    TextWidthBasisL: () => (T.TextWidthBasisL = dart.constFn(dart.legacy(text_painter.TextWidthBasis)))(),
+    VoidToint: () => (T.VoidToint = dart.constFn(dart.fnType(core.int, [])))(),
+    JSArrayOfTextBox: () => (T.JSArrayOfTextBox = dart.constFn(_interceptors.JSArray$(ui.TextBox)))()
   };
   var T$Eval = Object.assign({
     _: () => T$Eval
@@ -53,618 +66,1461 @@ define(['dart_sdk', 'packages/flutter/src/foundation/object.dart', 'packages/flu
   dart.defineLazy(CT, {
     get C0() {
       return C[0] = dart.const({
-        __proto__: borders$.BorderStyle.prototype,
-        [_name$]: "BorderStyle.none",
-        index: 0
+        __proto__: ui.PlaceholderAlignment.prototype,
+        [_name]: "PlaceholderAlignment.bottom",
+        index: 4
       });
     },
     get C1() {
-      return C[1] = dart.const({
-        __proto__: borders$.BorderStyle.prototype,
-        [_name$]: "BorderStyle.solid",
-        index: 1
-      });
+      return C[1] = dart.constList([], T.DiagnosticsNodeL());
     },
     get C2() {
-      return C[2] = dart.constList([C[0] || CT.C0, C[1] || CT.C1], T.BorderStyleL());
-    },
-    get C3() {
-      return C[3] = dart.const({
-        __proto__: ui.Color.prototype,
-        [Color_value]: 4278190080.0
+      return C[2] = dart.const({
+        __proto__: inline_span.InlineSpanSemanticsInformation.prototype,
+        [requiresOwnNode]: true,
+        [isPlaceholder$]: true,
+        [recognizer$0]: null,
+        [semanticsLabel$0]: null,
+        [text$0]: "￼"
       });
     },
     get C4() {
       return C[4] = dart.const({
-        __proto__: ui.Color.prototype,
-        [Color_value]: 0
+        __proto__: ui.Size.prototype,
+        [OffsetBase__dy]: 0,
+        [OffsetBase__dx]: 0
+      });
+    },
+    get C3() {
+      return C[3] = dart.const({
+        __proto__: text_painter.PlaceholderDimensions.prototype,
+        [baseline$0]: null,
+        [baselineOffset$]: null,
+        [alignment$0]: C[0] || CT.C0,
+        [size$]: C[4] || CT.C4
       });
     },
     get C5() {
       return C[5] = dart.const({
-        __proto__: borders$.BorderSide.prototype,
-        [style$]: C[0] || CT.C0,
-        [width$]: 0,
-        [color$]: C[3] || CT.C3
+        __proto__: text_painter.TextWidthBasis.prototype,
+        [_name$]: "TextWidthBasis.parent",
+        index: 0
+      });
+    },
+    get C6() {
+      return C[6] = dart.const({
+        __proto__: text_painter.TextWidthBasis.prototype,
+        [_name$]: "TextWidthBasis.longestLine",
+        index: 1
+      });
+    },
+    get C7() {
+      return C[7] = dart.constList([C[5] || CT.C5, C[6] || CT.C6], T.TextWidthBasisL());
+    },
+    get C8() {
+      return C[8] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.start",
+        index: 4
+      });
+    },
+    get C9() {
+      return C[9] = dart.const({
+        __proto__: ui.ParagraphConstraints.prototype,
+        [ParagraphConstraints_width]: 1 / 0
+      });
+    },
+    get C10() {
+      return C[10] = dart.const({
+        __proto__: ui.TextBaseline.prototype,
+        [_name]: "TextBaseline.alphabetic",
+        index: 0
+      });
+    },
+    get C11() {
+      return C[11] = dart.const({
+        __proto__: ui.TextBaseline.prototype,
+        [_name]: "TextBaseline.ideographic",
+        index: 1
+      });
+    },
+    get C12() {
+      return C[12] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.left",
+        index: 0
+      });
+    },
+    get C13() {
+      return C[13] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.right",
+        index: 1
+      });
+    },
+    get C14() {
+      return C[14] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.center",
+        index: 2
+      });
+    },
+    get C15() {
+      return C[15] = dart.const({
+        __proto__: ui.TextDirection.prototype,
+        [_name]: "TextDirection.rtl",
+        index: 0
+      });
+    },
+    get C16() {
+      return C[16] = dart.const({
+        __proto__: ui.TextDirection.prototype,
+        [_name]: "TextDirection.ltr",
+        index: 1
+      });
+    },
+    get C17() {
+      return C[17] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.justify",
+        index: 3
+      });
+    },
+    get C18() {
+      return C[18] = dart.const({
+        __proto__: ui.TextAlign.prototype,
+        [_name]: "TextAlign.end",
+        index: 5
+      });
+    },
+    get C19() {
+      return C[19] = dart.const({
+        __proto__: ui.TextAffinity.prototype,
+        [_name]: "TextAffinity.upstream",
+        index: 0
+      });
+    },
+    get C20() {
+      return C[20] = dart.const({
+        __proto__: ui.TextAffinity.prototype,
+        [_name]: "TextAffinity.downstream",
+        index: 1
+      });
+    },
+    get C21() {
+      return C[21] = dart.const({
+        __proto__: ui.BoxHeightStyle.prototype,
+        [_name]: "BoxHeightStyle.tight",
+        index: 0
+      });
+    },
+    get C22() {
+      return C[22] = dart.const({
+        __proto__: ui.BoxWidthStyle.prototype,
+        [_name]: "BoxWidthStyle.tight",
+        index: 0
       });
     }
   }, false);
-  var C = Array(6).fill(void 0);
+  var C = Array(23).fill(void 0);
   var I = [
-    "file:///C:/Users/Zax/Documents/flutter/packages/flutter/lib/src/painting/borders.dart",
-    "package:flutter/src/painting/borders.dart"
+    "file:///C:/Users/Zax/Documents/flutter/packages/flutter/lib/src/painting/placeholder_span.dart",
+    "file:///C:/Users/Zax/Documents/flutter/packages/flutter/lib/src/painting/inline_span.dart",
+    "package:flutter/src/painting/inline_span.dart",
+    "package:flutter/src/painting/placeholder_span.dart",
+    "file:///C:/Users/Zax/Documents/flutter/packages/flutter/lib/src/painting/text_span.dart",
+    "package:flutter/src/painting/text_span.dart",
+    "file:///C:/Users/Zax/Documents/flutter/packages/flutter/lib/src/painting/text_painter.dart",
+    "package:flutter/src/painting/text_painter.dart"
   ];
-  var _name$ = dart.privateName(borders$, "_name");
-  borders$.BorderStyle = class BorderStyle extends core.Object {
-    toString() {
-      return this[_name$];
-    }
-  };
-  (borders$.BorderStyle.new = function(index, _name) {
-    if (index == null) dart.nullFailed(I[0], 14, 6, "index");
-    if (_name == null) dart.nullFailed(I[0], 14, 6, "_name");
-    this.index = index;
-    this[_name$] = _name;
-    ;
-  }).prototype = borders$.BorderStyle.prototype;
-  dart.addTypeTests(borders$.BorderStyle);
-  dart.addTypeCaches(borders$.BorderStyle);
-  dart.setLibraryUri(borders$.BorderStyle, I[1]);
-  dart.setFieldSignature(borders$.BorderStyle, () => ({
-    __proto__: dart.getFields(borders$.BorderStyle.__proto__),
-    index: dart.finalFieldType(core.int),
-    [_name$]: dart.finalFieldType(core.String)
-  }));
-  dart.defineExtensionMethods(borders$.BorderStyle, ['toString']);
-  borders$.BorderStyle.none = C[0] || CT.C0;
-  borders$.BorderStyle.solid = C[1] || CT.C1;
-  borders$.BorderStyle.values = C[2] || CT.C2;
-  var color$ = dart.privateName(borders$, "BorderSide.color");
-  var width$ = dart.privateName(borders$, "BorderSide.width");
-  var style$ = dart.privateName(borders$, "BorderSide.style");
-  var Color_value = dart.privateName(ui, "Color.value");
-  borders$.BorderSide = class BorderSide extends core.Object {
-    get color() {
-      return this[color$];
-    }
-    set color(value) {
-      super.color = value;
-    }
-    get width() {
-      return this[width$];
-    }
-    set width(value) {
-      super.width = value;
-    }
+  var alignment$ = dart.privateName(placeholder_span, "PlaceholderSpan.alignment");
+  var baseline$ = dart.privateName(placeholder_span, "PlaceholderSpan.baseline");
+  var _name = dart.privateName(ui, "_name");
+  var style$ = dart.privateName(inline_span, "InlineSpan.style");
+  inline_span.InlineSpan = class InlineSpan extends diagnostics.DiagnosticableTree {
     get style() {
       return this[style$];
     }
     set style(value) {
       super.style = value;
     }
-    static merge(a, b) {
-      if (a == null) dart.nullFailed(I[0], 85, 38, "a");
-      if (b == null) dart.nullFailed(I[0], 85, 52, "b");
-      if (!(a != null)) dart.assertFailed(null, I[0], 86, 12, "a != null");
-      if (!(b != null)) dart.assertFailed(null, I[0], 87, 12, "b != null");
-      if (!dart.test(borders$.BorderSide.canMerge(a, b))) dart.assertFailed(null, I[0], 88, 12, "canMerge(a, b)");
-      let aIsNone = a.style == borders$.BorderStyle.none && a.width === 0.0;
-      let bIsNone = b.style == borders$.BorderStyle.none && b.width === 0.0;
-      if (aIsNone && bIsNone) return borders$.BorderSide.none;
-      if (aIsNone) return b;
-      if (bIsNone) return a;
-      if (!dart.equals(a.color, b.color)) dart.assertFailed(null, I[0], 97, 12, "a.color == b.color");
-      if (!(a.style == b.style)) dart.assertFailed(null, I[0], 98, 12, "a.style == b.style");
-      return new borders$.BorderSide.new({color: a.color, width: dart.notNull(a.width) + dart.notNull(b.width), style: a.style});
+    getSpanForPosition(position) {
+      if (position == null) dart.nullFailed(I[1], 181, 47, "position");
+      if (!dart.test(this.debugAssertIsValid())) dart.assertFailed(null, I[1], 182, 12, "debugAssertIsValid()");
+      let offset = new inline_span.Accumulator.new();
+      let result = null;
+      this.visitChildren(dart.fn(span => {
+        if (span == null) dart.nullFailed(I[1], 185, 31, "span");
+        result = span.getSpanForPositionVisitor(position, offset);
+        return result == null;
+      }, T.InlineSpanTobool()));
+      return result;
     }
-    copyWith(opts) {
-      let t0, t0$, t0$0;
-      let color = opts && 'color' in opts ? opts.color : null;
-      let width = opts && 'width' in opts ? opts.width : null;
-      let style = opts && 'style' in opts ? opts.style : null;
-      if (!(width == null || dart.notNull(width) >= 0.0)) dart.assertFailed(null, I[0], 135, 12, "width == null || width >= 0.0");
-      return new borders$.BorderSide.new({color: (t0 = color, t0 == null ? this.color : t0), width: (t0$ = width, t0$ == null ? this.width : t0$), style: (t0$0 = style, t0$0 == null ? this.style : t0$0)});
+    toPlainText(opts) {
+      let includeSemanticsLabels = opts && 'includeSemanticsLabels' in opts ? opts.includeSemanticsLabels : true;
+      if (includeSemanticsLabels == null) dart.nullFailed(I[1], 211, 28, "includeSemanticsLabels");
+      let includePlaceholders = opts && 'includePlaceholders' in opts ? opts.includePlaceholders : true;
+      if (includePlaceholders == null) dart.nullFailed(I[1], 211, 64, "includePlaceholders");
+      let buffer = new core.StringBuffer.new();
+      this.computeToPlainText(buffer, {includeSemanticsLabels: includeSemanticsLabels, includePlaceholders: includePlaceholders});
+      return buffer.toString();
     }
-    scale(t) {
-      if (t == null) dart.nullFailed(I[0], 159, 27, "t");
-      if (!(t != null)) dart.assertFailed(null, I[0], 160, 12, "t != null");
-      return new borders$.BorderSide.new({color: this.color, width: math.max(core.double, 0.0, dart.notNull(this.width) * dart.notNull(t)), style: dart.notNull(t) <= 0.0 ? borders$.BorderStyle.none : this.style});
+    getSemanticsInformation() {
+      let collector = T.JSArrayOfInlineSpanSemanticsInformation().of([]);
+      this.computeSemanticsInformation(collector);
+      return collector;
     }
-    toPaint() {
-      let t0, t0$;
-      switch (this.style) {
-        case C[1] || CT.C1:
-        {
-          t0 = ui.Paint.new();
-          return (() => {
-            t0.color = this.color;
-            t0.strokeWidth = this.width;
-            t0.style = ui.PaintingStyle.stroke;
-            return t0;
-          })();
-        }
-        case C[0] || CT.C0:
-        {
-          t0$ = ui.Paint.new();
-          return (() => {
-            t0$.color = C[4] || CT.C4;
-            t0$.strokeWidth = 0.0;
-            t0$.style = ui.PaintingStyle.stroke;
-            return t0$;
-          })();
-        }
-        default:
-        {
-          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-        }
-      }
+    codeUnitAt(index) {
+      if (index == null) dart.nullFailed(I[1], 261, 23, "index");
+      if (dart.notNull(index) < 0) return null;
+      let offset = new inline_span.Accumulator.new();
+      let result = null;
+      this.visitChildren(dart.fn(span => {
+        if (span == null) dart.nullFailed(I[1], 266, 31, "span");
+        result = span.codeUnitAtVisitor(index, offset);
+        return result == null;
+      }, T.InlineSpanTobool()));
+      return result;
     }
-    static canMerge(a, b) {
-      if (a == null) dart.nullFailed(I[0], 196, 35, "a");
-      if (b == null) dart.nullFailed(I[0], 196, 49, "b");
-      if (!(a != null)) dart.assertFailed(null, I[0], 197, 12, "a != null");
-      if (!(b != null)) dart.assertFailed(null, I[0], 198, 12, "b != null");
-      if (a.style == borders$.BorderStyle.none && a.width === 0.0 || b.style == borders$.BorderStyle.none && b.width === 0.0) return true;
-      return a.style == b.style && dart.equals(a.color, b.color);
-    }
-    static lerp(a, b, t) {
-      if (a == null) dart.nullFailed(I[0], 211, 37, "a");
-      if (b == null) dart.nullFailed(I[0], 211, 51, "b");
-      if (t == null) dart.nullFailed(I[0], 211, 61, "t");
-      if (!(a != null)) dart.assertFailed(null, I[0], 212, 12, "a != null");
-      if (!(b != null)) dart.assertFailed(null, I[0], 213, 12, "b != null");
-      if (!(t != null)) dart.assertFailed(null, I[0], 214, 12, "t != null");
-      if (t === 0.0) return a;
-      if (t === 1.0) return b;
-      let width = dart.nullCheck(ui.lerpDouble(a.width, b.width, t));
-      if (width < 0.0) return borders$.BorderSide.none;
-      if (a.style == b.style) {
-        return new borders$.BorderSide.new({color: dart.nullCheck(ui.Color.lerp(a.color, b.color, t)), width: width, style: a.style});
-      }
-      let colorA = null;
-      let colorB = null;
-      switch (a.style) {
-        case C[1] || CT.C1:
-        {
-          colorA = a.color;
-          break;
-        }
-        case C[0] || CT.C0:
-        {
-          colorA = a.color.withAlpha(0);
-          break;
-        }
-        default:
-        {
-          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-        }
-      }
-      switch (b.style) {
-        case C[1] || CT.C1:
-        {
-          colorB = b.color;
-          break;
-        }
-        case C[0] || CT.C0:
-        {
-          colorB = b.color.withAlpha(0);
-          break;
-        }
-        default:
-        {
-          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-        }
-      }
-      return new borders$.BorderSide.new({color: dart.nullCheck(ui.Color.lerp(colorA, colorB, t)), width: width, style: borders$.BorderStyle.solid});
+    debugAssertIsValid() {
+      return true;
     }
     _equals(other) {
       if (other == null) return false;
       if (this === other) return true;
       if (!dart.equals(dart.runtimeType(other), this[$runtimeType])) return false;
-      return borders$.BorderSide.is(other) && dart.equals(other.color, this.color) && other.width == this.width && other.style == this.style;
+      return inline_span.InlineSpan.is(other) && dart.equals(other.style, this.style);
     }
     get hashCode() {
-      return ui.hashValues(this.color, this.width, this.style);
+      return dart.hashCode(this.style);
     }
-    toString() {
-      return dart.str(object.objectRuntimeType(this, "BorderSide")) + "(" + dart.str(this.color) + ", " + this.width[$toStringAsFixed](1) + ", " + dart.str(this.style) + ")";
+    debugFillProperties(properties) {
+      if (properties == null) dart.nullFailed(I[1], 319, 56, "properties");
+      super.debugFillProperties(properties);
+      properties.defaultDiagnosticsTreeStyle = diagnostics.DiagnosticsTreeStyle.whitespace;
+      if (this.style != null) {
+        dart.nullCheck(this.style).debugFillProperties(properties);
+      }
     }
   };
-  (borders$.BorderSide.new = function(opts) {
-    let color = opts && 'color' in opts ? opts.color : C[3] || CT.C3;
-    if (color == null) dart.nullFailed(I[0], 66, 10, "color");
-    let width = opts && 'width' in opts ? opts.width : 1;
-    if (width == null) dart.nullFailed(I[0], 67, 10, "width");
-    let style = opts && 'style' in opts ? opts.style : C[1] || CT.C1;
-    if (style == null) dart.nullFailed(I[0], 68, 10, "style");
-    this[color$] = color;
-    this[width$] = width;
+  (inline_span.InlineSpan.new = function(opts) {
+    let style = opts && 'style' in opts ? opts.style : null;
     this[style$] = style;
-    if (!(color != null)) dart.assertFailed(null, I[0], 69, 15, "color != null");
-    if (!(width != null)) dart.assertFailed(null, I[0], 70, 15, "width != null");
-    if (!(dart.notNull(width) >= 0.0)) dart.assertFailed(null, I[0], 71, 15, "width >= 0.0");
-    if (!(style != null)) dart.assertFailed(null, I[0], 72, 15, "style != null");
+    inline_span.InlineSpan.__proto__.new.call(this);
     ;
-  }).prototype = borders$.BorderSide.prototype;
-  dart.addTypeTests(borders$.BorderSide);
-  dart.addTypeCaches(borders$.BorderSide);
-  dart.setMethodSignature(borders$.BorderSide, () => ({
-    __proto__: dart.getMethods(borders$.BorderSide.__proto__),
-    copyWith: dart.fnType(borders$.BorderSide, [], {color: dart.nullable(ui.Color), style: dart.nullable(borders$.BorderStyle), width: dart.nullable(core.double)}, {}),
-    scale: dart.fnType(borders$.BorderSide, [core.double]),
-    toPaint: dart.fnType(ui.Paint, [])
+  }).prototype = inline_span.InlineSpan.prototype;
+  dart.addTypeTests(inline_span.InlineSpan);
+  dart.addTypeCaches(inline_span.InlineSpan);
+  dart.setMethodSignature(inline_span.InlineSpan, () => ({
+    __proto__: dart.getMethods(inline_span.InlineSpan.__proto__),
+    getSpanForPosition: dart.fnType(dart.nullable(inline_span.InlineSpan), [ui.TextPosition]),
+    toPlainText: dart.fnType(core.String, [], {includePlaceholders: core.bool, includeSemanticsLabels: core.bool}, {}),
+    getSemanticsInformation: dart.fnType(core.List$(inline_span.InlineSpanSemanticsInformation), []),
+    codeUnitAt: dart.fnType(dart.nullable(core.int), [core.int]),
+    debugAssertIsValid: dart.fnType(core.bool, [])
   }));
-  dart.setLibraryUri(borders$.BorderSide, I[1]);
-  dart.setFieldSignature(borders$.BorderSide, () => ({
-    __proto__: dart.getFields(borders$.BorderSide.__proto__),
-    color: dart.finalFieldType(ui.Color),
-    width: dart.finalFieldType(core.double),
-    style: dart.finalFieldType(borders$.BorderStyle)
+  dart.setLibraryUri(inline_span.InlineSpan, I[2]);
+  dart.setFieldSignature(inline_span.InlineSpan, () => ({
+    __proto__: dart.getFields(inline_span.InlineSpan.__proto__),
+    style: dart.finalFieldType(dart.nullable(text_style.TextStyle))
   }));
-  dart.defineExtensionMethods(borders$.BorderSide, ['_equals', 'toString']);
-  dart.defineExtensionAccessors(borders$.BorderSide, ['hashCode']);
-  dart.defineLazy(borders$.BorderSide, {
-    /*borders$.BorderSide.none*/get none() {
-      return C[5] || CT.C5;
+  dart.defineExtensionMethods(inline_span.InlineSpan, ['_equals']);
+  dart.defineExtensionAccessors(inline_span.InlineSpan, ['hashCode']);
+  placeholder_span.PlaceholderSpan = class PlaceholderSpan extends inline_span.InlineSpan {
+    get alignment() {
+      return this[alignment$];
     }
-  }, false);
-  borders$.ShapeBorder = class ShapeBorder extends core.Object {
-    add(other, opts) {
-      if (other == null) dart.nullFailed(I[0], 319, 32, "other");
-      let reversed = opts && 'reversed' in opts ? opts.reversed : false;
-      if (reversed == null) dart.nullFailed(I[0], 319, 46, "reversed");
-      return null;
+    set alignment(value) {
+      super.alignment = value;
     }
-    ['+'](other) {
-      let t0, t0$;
-      if (other == null) dart.nullFailed(I[0], 329, 38, "other");
-      t0$ = (t0 = this.add(other), t0 == null ? other.add(this, {reversed: true}) : t0);
-      return t0$ == null ? new borders$._CompoundBorder.new(T.JSArrayOfShapeBorder().of([other, this])) : t0$;
+    get baseline() {
+      return this[baseline$];
     }
-    lerpFrom(a, t) {
-      if (t == null) dart.nullFailed(I[0], 382, 48, "t");
-      if (a == null) return this.scale(t);
-      return null;
+    set baseline(value) {
+      super.baseline = value;
     }
-    lerpTo(b, t) {
-      if (t == null) dart.nullFailed(I[0], 414, 46, "t");
-      if (b == null) return this.scale(1.0 - dart.notNull(t));
-      return null;
+    computeToPlainText(buffer, opts) {
+      if (buffer == null) dart.nullFailed(I[0], 58, 40, "buffer");
+      let includeSemanticsLabels = opts && 'includeSemanticsLabels' in opts ? opts.includeSemanticsLabels : true;
+      if (includeSemanticsLabels == null) dart.nullFailed(I[0], 58, 54, "includeSemanticsLabels");
+      let includePlaceholders = opts && 'includePlaceholders' in opts ? opts.includePlaceholders : true;
+      if (includePlaceholders == null) dart.nullFailed(I[0], 58, 90, "includePlaceholders");
+      if (dart.test(includePlaceholders)) {
+        buffer.write("￼");
+      }
     }
-    static lerp(a, b, t) {
-      let t0;
-      if (t == null) dart.nullFailed(I[0], 428, 67, "t");
-      if (!(t != null)) dart.assertFailed(null, I[0], 429, 12, "t != null");
-      let result = null;
-      if (b != null) result = b.lerpFrom(a, t);
-      if (result == null && a != null) result = a.lerpTo(b, t);
-      t0 = result;
-      return t0 == null ? dart.notNull(t) < 0.5 ? a : b : t0;
+    computeSemanticsInformation(collector) {
+      if (collector == null) dart.nullFailed(I[0], 65, 73, "collector");
+      collector[$add](inline_span.InlineSpanSemanticsInformation.placeholder);
     }
-    toString() {
-      return dart.str(object.objectRuntimeType(this, "ShapeBorder")) + "()";
+    describeSemantics(offset, semanticsOffsets, semanticsElements) {
+      if (offset == null) dart.nullFailed(I[0], 76, 38, "offset");
+      if (semanticsOffsets == null) dart.nullFailed(I[0], 76, 56, "semanticsOffsets");
+      if (semanticsElements == null) dart.nullFailed(I[0], 76, 88, "semanticsElements");
+      semanticsOffsets[$add](offset.value);
+      semanticsOffsets[$add](dart.notNull(offset.value) + 1);
+      semanticsElements[$add](null);
+      offset.increment(1);
+    }
+    debugFillProperties(properties) {
+      if (properties == null) dart.nullFailed(I[0], 84, 56, "properties");
+      super.debugFillProperties(properties);
+      properties.add(new (T.EnumPropertyOfPlaceholderAlignment()).new("alignment", this.alignment, {defaultValue: null}));
+      properties.add(new (T.EnumPropertyOfTextBaseline()).new("baseline", this.baseline, {defaultValue: null}));
     }
   };
-  (borders$.ShapeBorder.new = function() {
+  (placeholder_span.PlaceholderSpan.new = function(opts) {
+    let alignment = opts && 'alignment' in opts ? opts.alignment : C[0] || CT.C0;
+    if (alignment == null) dart.nullFailed(I[0], 39, 10, "alignment");
+    let baseline = opts && 'baseline' in opts ? opts.baseline : null;
+    let style = opts && 'style' in opts ? opts.style : null;
+    this[alignment$] = alignment;
+    this[baseline$] = baseline;
+    placeholder_span.PlaceholderSpan.__proto__.new.call(this, {style: style});
     ;
-  }).prototype = borders$.ShapeBorder.prototype;
-  dart.addTypeTests(borders$.ShapeBorder);
-  dart.addTypeCaches(borders$.ShapeBorder);
-  dart.setMethodSignature(borders$.ShapeBorder, () => ({
-    __proto__: dart.getMethods(borders$.ShapeBorder.__proto__),
-    add: dart.fnType(dart.nullable(borders$.ShapeBorder), [borders$.ShapeBorder], {reversed: core.bool}, {}),
-    '+': dart.fnType(borders$.ShapeBorder, [borders$.ShapeBorder]),
-    lerpFrom: dart.fnType(dart.nullable(borders$.ShapeBorder), [dart.nullable(borders$.ShapeBorder), core.double]),
-    lerpTo: dart.fnType(dart.nullable(borders$.ShapeBorder), [dart.nullable(borders$.ShapeBorder), core.double])
+  }).prototype = placeholder_span.PlaceholderSpan.prototype;
+  dart.addTypeTests(placeholder_span.PlaceholderSpan);
+  dart.addTypeCaches(placeholder_span.PlaceholderSpan);
+  dart.setMethodSignature(placeholder_span.PlaceholderSpan, () => ({
+    __proto__: dart.getMethods(placeholder_span.PlaceholderSpan.__proto__),
+    computeToPlainText: dart.fnType(dart.void, [core.StringBuffer], {includePlaceholders: core.bool, includeSemanticsLabels: core.bool}, {}),
+    computeSemanticsInformation: dart.fnType(dart.void, [core.List$(inline_span.InlineSpanSemanticsInformation)]),
+    describeSemantics: dart.fnType(dart.void, [inline_span.Accumulator, core.List$(core.int), core.List])
   }));
-  dart.setLibraryUri(borders$.ShapeBorder, I[1]);
-  dart.defineExtensionMethods(borders$.ShapeBorder, ['toString']);
-  var side$ = dart.privateName(borders$, "OutlinedBorder.side");
-  borders$.OutlinedBorder = class OutlinedBorder extends borders$.ShapeBorder {
-    get side() {
-      return this[side$];
-    }
-    set side(value) {
-      super.side = value;
-    }
-  };
-  (borders$.OutlinedBorder.new = function(opts) {
-    let side = opts && 'side' in opts ? opts.side : C[5] || CT.C5;
-    if (side == null) dart.nullFailed(I[0], 502, 31, "side");
-    this[side$] = side;
-    if (!(side != null)) dart.assertFailed(null, I[0], 502, 66, "side != null");
-    borders$.OutlinedBorder.__proto__.new.call(this);
-    ;
-  }).prototype = borders$.OutlinedBorder.prototype;
-  dart.addTypeTests(borders$.OutlinedBorder);
-  dart.addTypeCaches(borders$.OutlinedBorder);
-  dart.setLibraryUri(borders$.OutlinedBorder, I[1]);
-  dart.setFieldSignature(borders$.OutlinedBorder, () => ({
-    __proto__: dart.getFields(borders$.OutlinedBorder.__proto__),
-    side: dart.finalFieldType(borders$.BorderSide)
+  dart.setLibraryUri(placeholder_span.PlaceholderSpan, I[3]);
+  dart.setFieldSignature(placeholder_span.PlaceholderSpan, () => ({
+    __proto__: dart.getFields(placeholder_span.PlaceholderSpan.__proto__),
+    alignment: dart.finalFieldType(ui.PlaceholderAlignment),
+    baseline: dart.finalFieldType(dart.nullable(ui.TextBaseline))
   }));
-  borders$._CompoundBorder = class _CompoundBorder extends borders$.ShapeBorder {
-    get dimensions() {
-      return this.borders[$fold](edge_insets.EdgeInsetsGeometry, edge_insets.EdgeInsets.zero, dart.fn((previousValue, border) => {
-        if (previousValue == null) dart.nullFailed(I[0], 530, 27, "previousValue");
-        if (border == null) dart.nullFailed(I[0], 530, 54, "border");
-        return previousValue.add(border.dimensions);
-      }, T.EdgeInsetsGeometryAndShapeBorderToEdgeInsetsGeometry()));
+  var text$ = dart.privateName(text_span, "TextSpan.text");
+  var children$ = dart.privateName(text_span, "TextSpan.children");
+  var recognizer$ = dart.privateName(text_span, "TextSpan.recognizer");
+  var semanticsLabel$ = dart.privateName(text_span, "TextSpan.semanticsLabel");
+  text_span.TextSpan = class TextSpan extends inline_span.InlineSpan {
+    get text() {
+      return this[text$];
     }
-    add(other, opts) {
-      let t0;
-      if (other == null) dart.nullFailed(I[0], 537, 31, "other");
-      let reversed = opts && 'reversed' in opts ? opts.reversed : false;
-      if (reversed == null) dart.nullFailed(I[0], 537, 45, "reversed");
-      if (!borders$._CompoundBorder.is(other)) {
-        let ours = dart.test(reversed) ? this.borders[$last] : this.borders[$first];
-        let merged = (t0 = ours.add(other, {reversed: reversed}), t0 == null ? other.add(ours, {reversed: !dart.test(reversed)}) : t0);
-        if (merged != null) {
-          let result = (() => {
-            let t0 = T.ListOfShapeBorder().of(this.borders);
-            return t0;
-          })();
-          result[$_set](dart.test(reversed) ? dart.notNull(result[$length]) - 1 : 0, merged);
-          return new borders$._CompoundBorder.new(result);
+    set text(value) {
+      super.text = value;
+    }
+    get children() {
+      return this[children$];
+    }
+    set children(value) {
+      super.children = value;
+    }
+    get recognizer() {
+      return this[recognizer$];
+    }
+    set recognizer(value) {
+      super.recognizer = value;
+    }
+    get semanticsLabel() {
+      return this[semanticsLabel$];
+    }
+    set semanticsLabel(value) {
+      super.semanticsLabel = value;
+    }
+    build(builder, opts) {
+      if (builder == null) dart.nullFailed(I[4], 195, 25, "builder");
+      let textScaleFactor = opts && 'textScaleFactor' in opts ? opts.textScaleFactor : 1;
+      if (textScaleFactor == null) dart.nullFailed(I[4], 196, 12, "textScaleFactor");
+      let dimensions = opts && 'dimensions' in opts ? opts.dimensions : null;
+      if (!dart.test(this.debugAssertIsValid())) dart.assertFailed(null, I[4], 199, 12, "debugAssertIsValid()");
+      let hasStyle = this.style != null;
+      if (hasStyle) builder.pushStyle(dart.nullCheck(this.style).getTextStyle({textScaleFactor: textScaleFactor}));
+      if (this.text != null) builder.addText(dart.nullCheck(this.text));
+      if (this.children != null) {
+        for (let child of dart.nullCheck(this.children)) {
+          if (!(child != null)) dart.assertFailed(null, I[4], 207, 16, "child != null");
+          child.build(builder, {textScaleFactor: textScaleFactor, dimensions: dimensions});
         }
       }
-      let mergedBorders = (() => {
-        let t1 = T.JSArrayOfShapeBorder().of([]);
-        if (dart.test(reversed)) t1[$addAll](this.borders);
-        if (borders$._CompoundBorder.is(other))
-          t1[$addAll](other.borders);
-        else
-          t1[$add](other);
-        if (!dart.test(reversed)) t1[$addAll](this.borders);
-        return t1;
-      })();
-      return new borders$._CompoundBorder.new(mergedBorders);
+      if (hasStyle) builder.pop();
     }
-    scale(t) {
-      if (t == null) dart.nullFailed(I[0], 567, 28, "t");
-      return new borders$._CompoundBorder.new(this.borders[$map](borders$.ShapeBorder, dart.fn(border => {
-        if (border == null) dart.nullFailed(I[0], 569, 45, "border");
-        return border.scale(t);
-      }, T.ShapeBorderToShapeBorder()))[$toList]());
+    visitChildren(visitor) {
+      if (visitor == null) dart.nullFailed(I[4], 225, 40, "visitor");
+      if (this.text != null) {
+        if (!dart.test(visitor(this))) return false;
+      }
+      if (this.children != null) {
+        for (let child of dart.nullCheck(this.children)) {
+          if (!dart.test(child.visitChildren(visitor))) return false;
+        }
+      }
+      return true;
     }
-    lerpFrom(a, t) {
-      if (t == null) dart.nullFailed(I[0], 574, 48, "t");
-      return borders$._CompoundBorder.lerp(a, this, t);
+    getSpanForPositionVisitor(position, offset) {
+      if (position == null) dart.nullFailed(I[4], 241, 54, "position");
+      if (offset == null) dart.nullFailed(I[4], 241, 76, "offset");
+      if (this.text == null) {
+        return null;
+      }
+      let affinity = position.affinity;
+      let targetOffset = position.offset;
+      let endOffset = dart.notNull(offset.value) + dart.nullCheck(this.text).length;
+      if (offset.value == targetOffset && affinity == ui.TextAffinity.downstream || dart.notNull(offset.value) < dart.notNull(targetOffset) && dart.notNull(targetOffset) < endOffset || endOffset === targetOffset && affinity == ui.TextAffinity.upstream) {
+        return this;
+      }
+      offset.increment(dart.nullCheck(this.text).length);
+      return null;
     }
-    lerpTo(b, t) {
-      if (t == null) dart.nullFailed(I[0], 579, 46, "t");
-      return borders$._CompoundBorder.lerp(this, b, t);
+    computeToPlainText(buffer, opts) {
+      if (buffer == null) dart.nullFailed(I[4], 259, 18, "buffer");
+      let includeSemanticsLabels = opts && 'includeSemanticsLabels' in opts ? opts.includeSemanticsLabels : true;
+      if (includeSemanticsLabels == null) dart.nullFailed(I[4], 260, 10, "includeSemanticsLabels");
+      let includePlaceholders = opts && 'includePlaceholders' in opts ? opts.includePlaceholders : true;
+      if (includePlaceholders == null) dart.nullFailed(I[4], 261, 10, "includePlaceholders");
+      if (!dart.test(this.debugAssertIsValid())) dart.assertFailed(null, I[4], 263, 12, "debugAssertIsValid()");
+      if (this.semanticsLabel != null && dart.test(includeSemanticsLabels)) {
+        buffer.write(this.semanticsLabel);
+      } else if (this.text != null) {
+        buffer.write(this.text);
+      }
+      if (this.children != null) {
+        for (let child of dart.nullCheck(this.children)) {
+          child.computeToPlainText(buffer, {includeSemanticsLabels: includeSemanticsLabels, includePlaceholders: includePlaceholders});
+        }
+      }
     }
-    static lerp(a, b, t) {
-      let t2;
-      if (t == null) dart.nullFailed(I[0], 583, 70, "t");
-      if (!(t != null)) dart.assertFailed(null, I[0], 584, 12, "t != null");
-      if (!(borders$._CompoundBorder.is(a) || borders$._CompoundBorder.is(b))) dart.assertFailed(null, I[0], 585, 12, "a is _CompoundBorder || b is _CompoundBorder");
-      let aList = borders$._CompoundBorder.is(a) ? a.borders : T.JSArrayOfShapeBorderN().of([a]);
-      let bList = borders$._CompoundBorder.is(b) ? b.borders : T.JSArrayOfShapeBorderN().of([b]);
-      let results = T.JSArrayOfShapeBorder().of([]);
-      let length = math.max(core.int, aList[$length], bList[$length]);
-      for (let index = 0; index < length; index = index + 1) {
-        let localA = index < dart.notNull(aList[$length]) ? aList[$_get](index) : null;
-        let localB = index < dart.notNull(bList[$length]) ? bList[$_get](index) : null;
-        if (localA != null && localB != null) {
-          let localResult = (t2 = localA.lerpTo(localB, t), t2 == null ? localB.lerpFrom(localA, t) : t2);
-          if (localResult != null) {
-            results[$add](localResult);
-            continue;
+    computeSemanticsInformation(collector) {
+      if (collector == null) dart.nullFailed(I[4], 280, 73, "collector");
+      if (!dart.test(this.debugAssertIsValid())) dart.assertFailed(null, I[4], 281, 12, "debugAssertIsValid()");
+      if (this.text != null || this.semanticsLabel != null) {
+        collector[$add](new inline_span.InlineSpanSemanticsInformation.new(dart.nullCheck(this.text), {semanticsLabel: this.semanticsLabel, recognizer: this.recognizer}));
+      }
+      if (this.children != null) {
+        for (let child of dart.nullCheck(this.children)) {
+          child.computeSemanticsInformation(collector);
+        }
+      }
+    }
+    codeUnitAtVisitor(index, offset) {
+      if (index == null) dart.nullFailed(I[4], 297, 30, "index");
+      if (offset == null) dart.nullFailed(I[4], 297, 49, "offset");
+      if (this.text == null) {
+        return null;
+      }
+      if (dart.notNull(index) - dart.notNull(offset.value) < dart.nullCheck(this.text).length) {
+        return dart.nullCheck(this.text)[$codeUnitAt](dart.notNull(index) - dart.notNull(offset.value));
+      }
+      offset.increment(dart.nullCheck(this.text).length);
+      return null;
+    }
+    describeSemantics(offset, semanticsOffsets, semanticsElements) {
+      let t0, t0$;
+      if (offset == null) dart.nullFailed(I[4], 317, 38, "offset");
+      if (semanticsOffsets == null) dart.nullFailed(I[4], 317, 56, "semanticsOffsets");
+      if (semanticsElements == null) dart.nullFailed(I[4], 317, 88, "semanticsElements");
+      if (this.recognizer != null && (tap.TapGestureRecognizer.is(this.recognizer) || long_press.LongPressGestureRecognizer.is(this.recognizer))) {
+        let length = (t0$ = (t0 = this.semanticsLabel, t0 == null ? null : t0.length), t0$ == null ? dart.nullCheck(this.text).length : t0$);
+        semanticsOffsets[$add](offset.value);
+        semanticsOffsets[$add](dart.notNull(offset.value) + dart.notNull(length));
+        semanticsElements[$add](this.recognizer);
+      }
+      offset.increment(this.text != null ? dart.nullCheck(this.text).length : 0);
+    }
+    debugAssertIsValid() {
+      if (!dart.test(dart.fn(() => {
+        if (this.children != null) {
+          for (let child of dart.nullCheck(this.children)) {
+            if (child == null) {
+              dart.throw(new assertions.FlutterError.fromParts(T.JSArrayOfDiagnosticsNode().of([new assertions.ErrorSummary.new("TextSpan contains a null child."), new assertions.ErrorDescription.new("A TextSpan object with a non-null child list should not have any nulls in its child list."), this.toDiagnosticsNode({name: "The full text in question was", style: diagnostics.DiagnosticsTreeStyle.errorProperty})])));
+            }
+            if (!dart.test(child.debugAssertIsValid())) dart.assertFailed(null, I[4], 355, 18, "child.debugAssertIsValid()");
           }
         }
-        if (localB != null) results[$add](localB.scale(t));
-        if (localA != null) results[$add](localA.scale(1.0 - dart.notNull(t)));
+        return true;
+      }, T.VoidTobool())())) dart.assertFailed(null, I[4], 340, 12, "() {\r\n      if (children != null) {\r\n        for (final InlineSpan child in children!) {\r\n          // `child` has a non-nullable return type, but might be null when\r\n          // running with weak checking, so we need to null check it anyway (and\r\n          // ignore the warning that the null-handling logic is dead code).\r\n          if (child == null) { // ignore: dead_code\r\n            throw FlutterError.fromParts(<DiagnosticsNode>[\r\n              ErrorSummary('TextSpan contains a null child.'),\r\n              ErrorDescription(\r\n                  'A TextSpan object with a non-null child list should not have any nulls in its child list.'),\r\n              toDiagnosticsNode(name: 'The full text in question was',\r\n                  style: DiagnosticsTreeStyle.errorProperty),\r\n            ]);\r\n          }\r\n          assert(child.debugAssertIsValid());\r\n        }\r\n      }\r\n      return true;\r\n    }()");
+      return super.debugAssertIsValid();
+    }
+    compareTo(other) {
+      let t0, t0$;
+      if (other == null) dart.nullFailed(I[4], 364, 41, "other");
+      if (this === other) return basic_types.RenderComparison.identical;
+      if (!dart.equals(dart.runtimeType(other), this[$runtimeType])) return basic_types.RenderComparison.layout;
+      let textSpan = text_span.TextSpan.as(other);
+      if (textSpan.text != this.text || (t0 = this.children, t0 == null ? null : t0[$length]) != (t0$ = textSpan.children, t0$ == null ? null : t0$[$length]) || this.style == null !== (textSpan.style == null)) return basic_types.RenderComparison.layout;
+      let result = dart.equals(this.recognizer, textSpan.recognizer) ? basic_types.RenderComparison.identical : basic_types.RenderComparison.metadata;
+      if (this.style != null) {
+        let candidate = dart.nullCheck(this.style).compareTo(dart.nullCheck(textSpan.style));
+        if (dart.notNull(candidate.index) > dart.notNull(result.index)) result = candidate;
+        if (result == basic_types.RenderComparison.layout) return result;
       }
-      return new borders$._CompoundBorder.new(results);
-    }
-    getInnerPath(rect, opts) {
-      if (rect == null) dart.nullFailed(I[0], 613, 26, "rect");
-      let textDirection = opts && 'textDirection' in opts ? opts.textDirection : null;
-      for (let index = 0; index < dart.notNull(this.borders[$length]) - 1; index = index + 1)
-        rect = this.borders[$_get](index).dimensions.resolve(textDirection).deflateRect(rect);
-      return this.borders[$last].getInnerPath(rect, {textDirection: textDirection});
-    }
-    getOuterPath(rect, opts) {
-      if (rect == null) dart.nullFailed(I[0], 620, 26, "rect");
-      let textDirection = opts && 'textDirection' in opts ? opts.textDirection : null;
-      return this.borders[$first].getOuterPath(rect, {textDirection: textDirection});
-    }
-    paint(canvas, rect, opts) {
-      if (canvas == null) dart.nullFailed(I[0], 625, 21, "canvas");
-      if (rect == null) dart.nullFailed(I[0], 625, 34, "rect");
-      let textDirection = opts && 'textDirection' in opts ? opts.textDirection : null;
-      for (let border of this.borders) {
-        border.paint(canvas, rect, {textDirection: textDirection});
-        rect = border.dimensions.resolve(textDirection).deflateRect(rect);
+      if (this.children != null) {
+        for (let index = 0; index < dart.notNull(dart.nullCheck(this.children)[$length]); index = index + 1) {
+          let candidate = dart.nullCheck(this.children)[$_get](index).compareTo(dart.nullCheck(textSpan.children)[$_get](index));
+          if (dart.notNull(candidate.index) > dart.notNull(result.index)) result = candidate;
+          if (result == basic_types.RenderComparison.layout) return result;
+        }
       }
+      return result;
     }
     _equals(other) {
       if (other == null) return false;
       if (this === other) return true;
       if (!dart.equals(dart.runtimeType(other), this[$runtimeType])) return false;
-      return borders$._CompoundBorder.is(other) && dart.test(collections.listEquals(borders$.ShapeBorder, other.borders, this.borders));
+      if (!super._equals(other)) return false;
+      return text_span.TextSpan.is(other) && other.text == this.text && dart.equals(other.recognizer, this.recognizer) && other.semanticsLabel == this.semanticsLabel && dart.test(collections.listEquals(inline_span.InlineSpan, other.children, this.children));
     }
     get hashCode() {
-      return ui.hashList(this.borders);
+      return ui.hashValues(super.hashCode, this.text, this.recognizer, this.semanticsLabel, ui.hashList(this.children));
+    }
+    toStringShort() {
+      return object.objectRuntimeType(this, "TextSpan");
+    }
+    debugFillProperties(properties) {
+      let t0;
+      if (properties == null) dart.nullFailed(I[4], 424, 56, "properties");
+      super.debugFillProperties(properties);
+      properties.add(new diagnostics.StringProperty.new("text", this.text, {showName: false, defaultValue: null}));
+      if (this.style == null && this.text == null && this.children == null) properties.add(diagnostics.DiagnosticsNode.message("(empty)"));
+      properties.add(new (T.DiagnosticsPropertyOfGestureRecognizer()).new("recognizer", this.recognizer, {description: (t0 = this.recognizer, t0 == null ? null : dart.toString(dart.runtimeType(t0))), defaultValue: null}));
+      if (this.semanticsLabel != null) {
+        properties.add(new diagnostics.StringProperty.new("semanticsLabel", this.semanticsLabel));
+      }
+    }
+    debugDescribeChildren() {
+      if (this.children == null) return C[1] || CT.C1;
+      return dart.nullCheck(this.children)[$map](diagnostics.DiagnosticsNode, dart.fn(child => {
+        if (child == null) dart.nullFailed(I[4], 453, 55, "child");
+        if (child != null) {
+          return child.toDiagnosticsNode();
+        } else {
+          return diagnostics.DiagnosticsNode.message("<null child>");
+        }
+      }, T.InlineSpanToDiagnosticsNode()))[$toList]();
+    }
+  };
+  (text_span.TextSpan.new = function(opts) {
+    let text = opts && 'text' in opts ? opts.text : null;
+    let children = opts && 'children' in opts ? opts.children : null;
+    let style = opts && 'style' in opts ? opts.style : null;
+    let recognizer = opts && 'recognizer' in opts ? opts.recognizer : null;
+    let semanticsLabel = opts && 'semanticsLabel' in opts ? opts.semanticsLabel : null;
+    this[text$] = text;
+    this[children$] = children;
+    this[recognizer$] = recognizer;
+    this[semanticsLabel$] = semanticsLabel;
+    text_span.TextSpan.__proto__.new.call(this, {style: style});
+    ;
+  }).prototype = text_span.TextSpan.prototype;
+  dart.addTypeTests(text_span.TextSpan);
+  dart.addTypeCaches(text_span.TextSpan);
+  dart.setMethodSignature(text_span.TextSpan, () => ({
+    __proto__: dart.getMethods(text_span.TextSpan.__proto__),
+    build: dart.fnType(dart.void, [ui.ParagraphBuilder], {dimensions: dart.nullable(core.List$(text_painter.PlaceholderDimensions)), textScaleFactor: core.double}, {}),
+    visitChildren: dart.fnType(core.bool, [dart.fnType(core.bool, [inline_span.InlineSpan])]),
+    getSpanForPositionVisitor: dart.fnType(dart.nullable(inline_span.InlineSpan), [ui.TextPosition, inline_span.Accumulator]),
+    computeToPlainText: dart.fnType(dart.void, [core.StringBuffer], {includePlaceholders: core.bool, includeSemanticsLabels: core.bool}, {}),
+    computeSemanticsInformation: dart.fnType(dart.void, [core.List$(inline_span.InlineSpanSemanticsInformation)]),
+    codeUnitAtVisitor: dart.fnType(dart.nullable(core.int), [core.int, inline_span.Accumulator]),
+    describeSemantics: dart.fnType(dart.void, [inline_span.Accumulator, core.List$(core.int), core.List]),
+    compareTo: dart.fnType(basic_types.RenderComparison, [inline_span.InlineSpan])
+  }));
+  dart.setLibraryUri(text_span.TextSpan, I[5]);
+  dart.setFieldSignature(text_span.TextSpan, () => ({
+    __proto__: dart.getFields(text_span.TextSpan.__proto__),
+    text: dart.finalFieldType(dart.nullable(core.String)),
+    children: dart.finalFieldType(dart.nullable(core.List$(inline_span.InlineSpan))),
+    recognizer: dart.finalFieldType(dart.nullable(recognizer.GestureRecognizer)),
+    semanticsLabel: dart.finalFieldType(dart.nullable(core.String))
+  }));
+  dart.defineExtensionMethods(text_span.TextSpan, ['_equals']);
+  dart.defineExtensionAccessors(text_span.TextSpan, ['hashCode']);
+  var _value$ = dart.privateName(inline_span, "_value");
+  inline_span.Accumulator = class Accumulator extends core.Object {
+    get value() {
+      return this[_value$];
+    }
+    increment(addend) {
+      if (addend == null) dart.nullFailed(I[1], 28, 22, "addend");
+      if (!(dart.notNull(addend) >= 0)) dart.assertFailed(null, I[1], 29, 12, "addend >= 0");
+      this[_value$] = dart.notNull(this[_value$]) + dart.notNull(addend);
+    }
+  };
+  (inline_span.Accumulator.new = function(_value = 0) {
+    if (_value == null) dart.nullFailed(I[1], 21, 21, "_value");
+    this[_value$] = _value;
+    ;
+  }).prototype = inline_span.Accumulator.prototype;
+  dart.addTypeTests(inline_span.Accumulator);
+  dart.addTypeCaches(inline_span.Accumulator);
+  dart.setMethodSignature(inline_span.Accumulator, () => ({
+    __proto__: dart.getMethods(inline_span.Accumulator.__proto__),
+    increment: dart.fnType(dart.void, [core.int])
+  }));
+  dart.setGetterSignature(inline_span.Accumulator, () => ({
+    __proto__: dart.getGetters(inline_span.Accumulator.__proto__),
+    value: core.int
+  }));
+  dart.setLibraryUri(inline_span.Accumulator, I[2]);
+  dart.setFieldSignature(inline_span.Accumulator, () => ({
+    __proto__: dart.getFields(inline_span.Accumulator.__proto__),
+    [_value$]: dart.fieldType(core.int)
+  }));
+  var text$0 = dart.privateName(inline_span, "InlineSpanSemanticsInformation.text");
+  var semanticsLabel$0 = dart.privateName(inline_span, "InlineSpanSemanticsInformation.semanticsLabel");
+  var recognizer$0 = dart.privateName(inline_span, "InlineSpanSemanticsInformation.recognizer");
+  var isPlaceholder$ = dart.privateName(inline_span, "InlineSpanSemanticsInformation.isPlaceholder");
+  var requiresOwnNode = dart.privateName(inline_span, "InlineSpanSemanticsInformation.requiresOwnNode");
+  inline_span.InlineSpanSemanticsInformation = class InlineSpanSemanticsInformation extends core.Object {
+    get text() {
+      return this[text$0];
+    }
+    set text(value) {
+      super.text = value;
+    }
+    get semanticsLabel() {
+      return this[semanticsLabel$0];
+    }
+    set semanticsLabel(value) {
+      super.semanticsLabel = value;
+    }
+    get recognizer() {
+      return this[recognizer$0];
+    }
+    set recognizer(value) {
+      super.recognizer = value;
+    }
+    get isPlaceholder() {
+      return this[isPlaceholder$];
+    }
+    set isPlaceholder(value) {
+      super.isPlaceholder = value;
+    }
+    get requiresOwnNode() {
+      return this[requiresOwnNode];
+    }
+    set requiresOwnNode(value) {
+      super.requiresOwnNode = value;
+    }
+    _equals(other) {
+      if (other == null) return false;
+      return inline_span.InlineSpanSemanticsInformation.is(other) && other.text == this.text && other.semanticsLabel == this.semanticsLabel && dart.equals(other.recognizer, this.recognizer) && other.isPlaceholder == this.isPlaceholder;
+    }
+    get hashCode() {
+      return ui.hashValues(this.text, this.semanticsLabel, this.recognizer, this.isPlaceholder);
     }
     toString() {
-      return this.borders[$reversed][$map](core.String, dart.fn(border => {
-        if (border == null) dart.nullFailed(I[0], 651, 54, "border");
-        return dart.toString(border);
-      }, T.ShapeBorderToString()))[$join](" + ");
+      return dart.str(object.objectRuntimeType(this, "InlineSpanSemanticsInformation")) + "{text: " + dart.str(this.text) + ", semanticsLabel: " + dart.str(this.semanticsLabel) + ", recognizer: " + dart.str(this.recognizer) + "}";
     }
   };
-  (borders$._CompoundBorder.new = function(borders) {
-    if (borders == null) dart.nullFailed(I[0], 519, 24, "borders");
-    this.borders = borders;
-    if (!(borders != null)) dart.assertFailed(null, I[0], 520, 14, "borders != null");
-    if (!(dart.notNull(borders[$length]) >= 2)) dart.assertFailed(null, I[0], 521, 14, "borders.length >= 2");
-    if (!!dart.test(borders[$any](dart.fn(border => {
-      if (border == null) dart.nullFailed(I[0], 522, 40, "border");
-      return borders$._CompoundBorder.is(border);
-    }, T.ShapeBorderTobool())))) dart.assertFailed(null, I[0], 522, 14, "!borders.any((ShapeBorder border) => border is _CompoundBorder)");
-    borders$._CompoundBorder.__proto__.new.call(this);
+  (inline_span.InlineSpanSemanticsInformation.new = function(text, opts) {
+    if (text == null) dart.nullFailed(I[1], 56, 10, "text");
+    let isPlaceholder = opts && 'isPlaceholder' in opts ? opts.isPlaceholder : false;
+    if (isPlaceholder == null) dart.nullFailed(I[1], 57, 10, "isPlaceholder");
+    let semanticsLabel = opts && 'semanticsLabel' in opts ? opts.semanticsLabel : null;
+    let recognizer = opts && 'recognizer' in opts ? opts.recognizer : null;
+    this[text$0] = text;
+    this[isPlaceholder$] = isPlaceholder;
+    this[semanticsLabel$0] = semanticsLabel;
+    this[recognizer$0] = recognizer;
+    if (!(text != null)) dart.assertFailed(null, I[1], 60, 15, "text != null");
+    if (!(isPlaceholder != null)) dart.assertFailed(null, I[1], 61, 15, "isPlaceholder != null");
+    if (!(isPlaceholder === false || text === "￼" && semanticsLabel == null && recognizer == null)) dart.assertFailed(null, I[1], 62, 15, "isPlaceholder == false || (text == '\\uFFFC' && semanticsLabel == null && recognizer == null)");
+    this[requiresOwnNode] = dart.test(isPlaceholder) || recognizer != null;
     ;
-  }).prototype = borders$._CompoundBorder.prototype;
-  dart.addTypeTests(borders$._CompoundBorder);
-  dart.addTypeCaches(borders$._CompoundBorder);
-  dart.setMethodSignature(borders$._CompoundBorder, () => ({
-    __proto__: dart.getMethods(borders$._CompoundBorder.__proto__),
-    add: dart.fnType(borders$.ShapeBorder, [borders$.ShapeBorder], {reversed: core.bool}, {}),
-    scale: dart.fnType(borders$.ShapeBorder, [core.double]),
-    getInnerPath: dart.fnType(ui.Path, [ui.Rect], {textDirection: dart.nullable(ui.TextDirection)}, {}),
-    getOuterPath: dart.fnType(ui.Path, [ui.Rect], {textDirection: dart.nullable(ui.TextDirection)}, {}),
-    paint: dart.fnType(dart.void, [ui.Canvas, ui.Rect], {textDirection: dart.nullable(ui.TextDirection)}, {})
+  }).prototype = inline_span.InlineSpanSemanticsInformation.prototype;
+  dart.addTypeTests(inline_span.InlineSpanSemanticsInformation);
+  dart.addTypeCaches(inline_span.InlineSpanSemanticsInformation);
+  dart.setLibraryUri(inline_span.InlineSpanSemanticsInformation, I[2]);
+  dart.setFieldSignature(inline_span.InlineSpanSemanticsInformation, () => ({
+    __proto__: dart.getFields(inline_span.InlineSpanSemanticsInformation.__proto__),
+    text: dart.finalFieldType(core.String),
+    semanticsLabel: dart.finalFieldType(dart.nullable(core.String)),
+    recognizer: dart.finalFieldType(dart.nullable(recognizer.GestureRecognizer)),
+    isPlaceholder: dart.finalFieldType(core.bool),
+    requiresOwnNode: dart.finalFieldType(core.bool)
   }));
-  dart.setGetterSignature(borders$._CompoundBorder, () => ({
-    __proto__: dart.getGetters(borders$._CompoundBorder.__proto__),
-    dimensions: edge_insets.EdgeInsetsGeometry
-  }));
-  dart.setLibraryUri(borders$._CompoundBorder, I[1]);
-  dart.setFieldSignature(borders$._CompoundBorder, () => ({
-    __proto__: dart.getFields(borders$._CompoundBorder.__proto__),
-    borders: dart.finalFieldType(core.List$(borders$.ShapeBorder))
-  }));
-  dart.defineExtensionMethods(borders$._CompoundBorder, ['_equals', 'toString']);
-  dart.defineExtensionAccessors(borders$._CompoundBorder, ['hashCode']);
-  borders$.paintBorder = function paintBorder(canvas, rect, opts) {
-    let t2;
-    if (canvas == null) dart.nullFailed(I[0], 673, 10, "canvas");
-    if (rect == null) dart.nullFailed(I[0], 674, 8, "rect");
-    let top = opts && 'top' in opts ? opts.top : C[5] || CT.C5;
-    if (top == null) dart.nullFailed(I[0], 675, 14, "top");
-    let right = opts && 'right' in opts ? opts.right : C[5] || CT.C5;
-    if (right == null) dart.nullFailed(I[0], 676, 14, "right");
-    let bottom = opts && 'bottom' in opts ? opts.bottom : C[5] || CT.C5;
-    if (bottom == null) dart.nullFailed(I[0], 677, 14, "bottom");
-    let left = opts && 'left' in opts ? opts.left : C[5] || CT.C5;
-    if (left == null) dart.nullFailed(I[0], 678, 14, "left");
-    if (!(canvas != null)) dart.assertFailed(null, I[0], 680, 10, "canvas != null");
-    if (!(rect != null)) dart.assertFailed(null, I[0], 681, 10, "rect != null");
-    if (!(top != null)) dart.assertFailed(null, I[0], 682, 10, "top != null");
-    if (!(right != null)) dart.assertFailed(null, I[0], 683, 10, "right != null");
-    if (!(bottom != null)) dart.assertFailed(null, I[0], 684, 10, "bottom != null");
-    if (!(left != null)) dart.assertFailed(null, I[0], 685, 10, "left != null");
-    let paint = (t2 = ui.Paint.new(), (() => {
-      t2.strokeWidth = 0.0;
-      return t2;
-    })());
-    let path = ui.Path.new();
-    switch (top.style) {
-      case C[1] || CT.C1:
-      {
-        paint.color = top.color;
-        path.reset();
-        path.moveTo(rect.left, rect.top);
-        path.lineTo(rect.right, rect.top);
-        if (top.width === 0.0) {
-          paint.style = ui.PaintingStyle.stroke;
-        } else {
-          paint.style = ui.PaintingStyle.fill;
-          path.lineTo(dart.notNull(rect.right) - dart.notNull(right.width), dart.notNull(rect.top) + dart.notNull(top.width));
-          path.lineTo(dart.notNull(rect.left) + dart.notNull(left.width), dart.notNull(rect.top) + dart.notNull(top.width));
-        }
-        canvas.drawPath(path, paint);
-        break;
-      }
-      case C[0] || CT.C0:
-      {
-        break;
-      }
-      default:
-      {
-        dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-      }
+  dart.defineExtensionMethods(inline_span.InlineSpanSemanticsInformation, ['_equals', 'toString']);
+  dart.defineExtensionAccessors(inline_span.InlineSpanSemanticsInformation, ['hashCode']);
+  dart.defineLazy(inline_span.InlineSpanSemanticsInformation, {
+    /*inline_span.InlineSpanSemanticsInformation.placeholder*/get placeholder() {
+      return C[2] || CT.C2;
     }
-    switch (right.style) {
-      case C[1] || CT.C1:
-      {
-        paint.color = right.color;
-        path.reset();
-        path.moveTo(rect.right, rect.top);
-        path.lineTo(rect.right, rect.bottom);
-        if (right.width === 0.0) {
-          paint.style = ui.PaintingStyle.stroke;
-        } else {
-          paint.style = ui.PaintingStyle.fill;
-          path.lineTo(dart.notNull(rect.right) - dart.notNull(right.width), dart.notNull(rect.bottom) - dart.notNull(bottom.width));
-          path.lineTo(dart.notNull(rect.right) - dart.notNull(right.width), dart.notNull(rect.top) + dart.notNull(top.width));
-        }
-        canvas.drawPath(path, paint);
-        break;
-      }
-      case C[0] || CT.C0:
-      {
-        break;
-      }
-      default:
-      {
-        dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-      }
+  }, false);
+  var size$ = dart.privateName(text_painter, "PlaceholderDimensions.size");
+  var alignment$0 = dart.privateName(text_painter, "PlaceholderDimensions.alignment");
+  var baselineOffset$ = dart.privateName(text_painter, "PlaceholderDimensions.baselineOffset");
+  var baseline$0 = dart.privateName(text_painter, "PlaceholderDimensions.baseline");
+  var OffsetBase__dy = dart.privateName(ui, "OffsetBase._dy");
+  var OffsetBase__dx = dart.privateName(ui, "OffsetBase._dx");
+  text_painter.PlaceholderDimensions = class PlaceholderDimensions extends core.Object {
+    get size() {
+      return this[size$];
     }
-    switch (bottom.style) {
-      case C[1] || CT.C1:
-      {
-        paint.color = bottom.color;
-        path.reset();
-        path.moveTo(rect.right, rect.bottom);
-        path.lineTo(rect.left, rect.bottom);
-        if (bottom.width === 0.0) {
-          paint.style = ui.PaintingStyle.stroke;
-        } else {
-          paint.style = ui.PaintingStyle.fill;
-          path.lineTo(dart.notNull(rect.left) + dart.notNull(left.width), dart.notNull(rect.bottom) - dart.notNull(bottom.width));
-          path.lineTo(dart.notNull(rect.right) - dart.notNull(right.width), dart.notNull(rect.bottom) - dart.notNull(bottom.width));
-        }
-        canvas.drawPath(path, paint);
-        break;
-      }
-      case C[0] || CT.C0:
-      {
-        break;
-      }
-      default:
-      {
-        dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-      }
+    set size(value) {
+      super.size = value;
     }
-    switch (left.style) {
-      case C[1] || CT.C1:
-      {
-        paint.color = left.color;
-        path.reset();
-        path.moveTo(rect.left, rect.bottom);
-        path.lineTo(rect.left, rect.top);
-        if (left.width === 0.0) {
-          paint.style = ui.PaintingStyle.stroke;
-        } else {
-          paint.style = ui.PaintingStyle.fill;
-          path.lineTo(dart.notNull(rect.left) + dart.notNull(left.width), dart.notNull(rect.top) + dart.notNull(top.width));
-          path.lineTo(dart.notNull(rect.left) + dart.notNull(left.width), dart.notNull(rect.bottom) - dart.notNull(bottom.width));
-        }
-        canvas.drawPath(path, paint);
-        break;
-      }
-      case C[0] || CT.C0:
-      {
-        break;
-      }
-      default:
-      {
-        dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
-      }
+    get alignment() {
+      return this[alignment$0];
+    }
+    set alignment(value) {
+      super.alignment = value;
+    }
+    get baselineOffset() {
+      return this[baselineOffset$];
+    }
+    set baselineOffset(value) {
+      super.baselineOffset = value;
+    }
+    get baseline() {
+      return this[baseline$0];
+    }
+    set baseline(value) {
+      super.baseline = value;
+    }
+    toString() {
+      return "PlaceholderDimensions(" + dart.str(this.size) + ", " + dart.str(this.baseline) + ")";
     }
   };
-  dart.trackLibraries("packages/flutter/src/painting/borders.dart", {
-    "package:flutter/src/painting/borders.dart": borders$
+  (text_painter.PlaceholderDimensions.new = function(opts) {
+    let size = opts && 'size' in opts ? opts.size : null;
+    if (size == null) dart.nullFailed(I[6], 45, 19, "size");
+    let alignment = opts && 'alignment' in opts ? opts.alignment : null;
+    if (alignment == null) dart.nullFailed(I[6], 46, 19, "alignment");
+    let baseline = opts && 'baseline' in opts ? opts.baseline : null;
+    let baselineOffset = opts && 'baselineOffset' in opts ? opts.baselineOffset : null;
+    this[size$] = size;
+    this[alignment$0] = alignment;
+    this[baseline$0] = baseline;
+    this[baselineOffset$] = baselineOffset;
+    if (!(size != null)) dart.assertFailed(null, I[6], 49, 15, "size != null");
+    if (!(alignment != null)) dart.assertFailed(null, I[6], 50, 15, "alignment != null");
+    ;
+  }).prototype = text_painter.PlaceholderDimensions.prototype;
+  dart.addTypeTests(text_painter.PlaceholderDimensions);
+  dart.addTypeCaches(text_painter.PlaceholderDimensions);
+  dart.setLibraryUri(text_painter.PlaceholderDimensions, I[7]);
+  dart.setFieldSignature(text_painter.PlaceholderDimensions, () => ({
+    __proto__: dart.getFields(text_painter.PlaceholderDimensions.__proto__),
+    size: dart.finalFieldType(ui.Size),
+    alignment: dart.finalFieldType(ui.PlaceholderAlignment),
+    baselineOffset: dart.finalFieldType(dart.nullable(core.double)),
+    baseline: dart.finalFieldType(dart.nullable(ui.TextBaseline))
+  }));
+  dart.defineExtensionMethods(text_painter.PlaceholderDimensions, ['toString']);
+  dart.defineLazy(text_painter.PlaceholderDimensions, {
+    /*text_painter.PlaceholderDimensions.empty*/get empty() {
+      return C[3] || CT.C3;
+    }
+  }, false);
+  var _name$ = dart.privateName(text_painter, "_name");
+  text_painter.TextWidthBasis = class TextWidthBasis extends core.Object {
+    toString() {
+      return this[_name$];
+    }
+  };
+  (text_painter.TextWidthBasis.new = function(index, _name) {
+    if (index == null) dart.nullFailed(I[6], 92, 6, "index");
+    if (_name == null) dart.nullFailed(I[6], 92, 6, "_name");
+    this.index = index;
+    this[_name$] = _name;
+    ;
+  }).prototype = text_painter.TextWidthBasis.prototype;
+  dart.addTypeTests(text_painter.TextWidthBasis);
+  dart.addTypeCaches(text_painter.TextWidthBasis);
+  dart.setLibraryUri(text_painter.TextWidthBasis, I[7]);
+  dart.setFieldSignature(text_painter.TextWidthBasis, () => ({
+    __proto__: dart.getFields(text_painter.TextWidthBasis.__proto__),
+    index: dart.finalFieldType(core.int),
+    [_name$]: dart.finalFieldType(core.String)
+  }));
+  dart.defineExtensionMethods(text_painter.TextWidthBasis, ['toString']);
+  text_painter.TextWidthBasis.parent = C[5] || CT.C5;
+  text_painter.TextWidthBasis.longestLine = C[6] || CT.C6;
+  text_painter.TextWidthBasis.values = C[7] || CT.C7;
+  var offset$ = dart.privateName(text_painter, "_CaretMetrics.offset");
+  var fullHeight$ = dart.privateName(text_painter, "_CaretMetrics.fullHeight");
+  text_painter._CaretMetrics = class _CaretMetrics extends core.Object {
+    get offset() {
+      return this[offset$];
+    }
+    set offset(value) {
+      super.offset = value;
+    }
+    get fullHeight() {
+      return this[fullHeight$];
+    }
+    set fullHeight(value) {
+      super.fullHeight = value;
+    }
+  };
+  (text_painter._CaretMetrics.new = function(opts) {
+    let offset = opts && 'offset' in opts ? opts.offset : null;
+    if (offset == null) dart.nullFailed(I[6], 108, 38, "offset");
+    let fullHeight = opts && 'fullHeight' in opts ? opts.fullHeight : null;
+    this[offset$] = offset;
+    this[fullHeight$] = fullHeight;
+    ;
+  }).prototype = text_painter._CaretMetrics.prototype;
+  dart.addTypeTests(text_painter._CaretMetrics);
+  dart.addTypeCaches(text_painter._CaretMetrics);
+  dart.setLibraryUri(text_painter._CaretMetrics, I[7]);
+  dart.setFieldSignature(text_painter._CaretMetrics, () => ({
+    __proto__: dart.getFields(text_painter._CaretMetrics.__proto__),
+    offset: dart.finalFieldType(ui.Offset),
+    fullHeight: dart.finalFieldType(dart.nullable(core.double))
+  }));
+  var _paragraph = dart.privateName(text_painter, "_paragraph");
+  var _needsLayout = dart.privateName(text_painter, "_needsLayout");
+  var _layoutTemplate = dart.privateName(text_painter, "_layoutTemplate");
+  var _inlinePlaceholderBoxes = dart.privateName(text_painter, "_inlinePlaceholderBoxes");
+  var _inlinePlaceholderScales = dart.privateName(text_painter, "_inlinePlaceholderScales");
+  var _placeholderDimensions = dart.privateName(text_painter, "_placeholderDimensions");
+  var _lastMinWidth = dart.privateName(text_painter, "_lastMinWidth");
+  var _lastMaxWidth = dart.privateName(text_painter, "_lastMaxWidth");
+  var __TextPainter__caretMetrics = dart.privateName(text_painter, "_#TextPainter#_caretMetrics");
+  var __TextPainter__caretMetrics_isSet = dart.privateName(text_painter, "_#TextPainter#_caretMetrics#isSet");
+  var _previousCaretPosition = dart.privateName(text_painter, "_previousCaretPosition");
+  var _previousCaretPrototype = dart.privateName(text_painter, "_previousCaretPrototype");
+  var _text = dart.privateName(text_painter, "_text");
+  var _textAlign = dart.privateName(text_painter, "_textAlign");
+  var _textDirection = dart.privateName(text_painter, "_textDirection");
+  var _textScaleFactor = dart.privateName(text_painter, "_textScaleFactor");
+  var _maxLines = dart.privateName(text_painter, "_maxLines");
+  var _ellipsis = dart.privateName(text_painter, "_ellipsis");
+  var _locale = dart.privateName(text_painter, "_locale");
+  var _strutStyle = dart.privateName(text_painter, "_strutStyle");
+  var _textWidthBasis = dart.privateName(text_painter, "_textWidthBasis");
+  var _textHeightBehavior = dart.privateName(text_painter, "_textHeightBehavior");
+  var _createParagraphStyle = dart.privateName(text_painter, "_createParagraphStyle");
+  var ParagraphConstraints_width = dart.privateName(ui, "ParagraphConstraints.width");
+  var _applyFloatingPointHack = dart.privateName(text_painter, "_applyFloatingPointHack");
+  var _emptyOffset = dart.privateName(text_painter, "_emptyOffset");
+  var _getRectFromUpstream = dart.privateName(text_painter, "_getRectFromUpstream");
+  var _getRectFromDownstream = dart.privateName(text_painter, "_getRectFromDownstream");
+  var _computeCaretMetrics = dart.privateName(text_painter, "_computeCaretMetrics");
+  var _caretMetrics = dart.privateName(text_painter, "_caretMetrics");
+  text_painter.TextPainter = class TextPainter extends core.Object {
+    markNeedsLayout() {
+      this[_paragraph] = null;
+      this[_needsLayout] = true;
+      this[_previousCaretPosition] = null;
+      this[_previousCaretPrototype] = null;
+    }
+    get text() {
+      return this[_text];
+    }
+    set text(value) {
+      let t0, t0$;
+      if (!(value == null || dart.test(value.debugAssertIsValid()))) dart.assertFailed(null, I[6], 199, 12, "value == null || value.debugAssertIsValid()");
+      if (dart.equals(this[_text], value)) return;
+      if (!dart.equals((t0 = this[_text], t0 == null ? null : t0.style), (t0$ = value, t0$ == null ? null : t0$.style))) this[_layoutTemplate] = null;
+      this[_text] = value;
+      this.markNeedsLayout();
+    }
+    get textAlign() {
+      return this[_textAlign];
+    }
+    set textAlign(value) {
+      if (value == null) dart.nullFailed(I[6], 215, 27, "value");
+      if (!(value != null)) dart.assertFailed(null, I[6], 216, 12, "value != null");
+      if (this[_textAlign] == value) return;
+      this[_textAlign] = value;
+      this.markNeedsLayout();
+    }
+    get textDirection() {
+      return this[_textDirection];
+    }
+    set textDirection(value) {
+      if (this[_textDirection] == value) return;
+      this[_textDirection] = value;
+      this.markNeedsLayout();
+      this[_layoutTemplate] = null;
+    }
+    get textScaleFactor() {
+      return this[_textScaleFactor];
+    }
+    set textScaleFactor(value) {
+      if (value == null) dart.nullFailed(I[6], 256, 30, "value");
+      if (!(value != null)) dart.assertFailed(null, I[6], 257, 12, "value != null");
+      if (this[_textScaleFactor] == value) return;
+      this[_textScaleFactor] = value;
+      this.markNeedsLayout();
+      this[_layoutTemplate] = null;
+    }
+    get ellipsis() {
+      return this[_ellipsis];
+    }
+    set ellipsis(value) {
+      if (!(value == null || value[$isNotEmpty])) dart.assertFailed(null, I[6], 284, 12, "value == null || value.isNotEmpty");
+      if (this[_ellipsis] == value) return;
+      this[_ellipsis] = value;
+      this.markNeedsLayout();
+    }
+    get locale() {
+      return this[_locale];
+    }
+    set locale(value) {
+      if (dart.equals(this[_locale], value)) return;
+      this[_locale] = value;
+      this.markNeedsLayout();
+    }
+    get maxLines() {
+      return this[_maxLines];
+    }
+    set maxLines(value) {
+      if (!(value == null || dart.notNull(value) > 0)) dart.assertFailed(null, I[6], 312, 12, "value == null || value > 0");
+      if (this[_maxLines] == value) return;
+      this[_maxLines] = value;
+      this.markNeedsLayout();
+    }
+    get strutStyle() {
+      return this[_strutStyle];
+    }
+    set strutStyle(value) {
+      if (dart.equals(this[_strutStyle], value)) return;
+      this[_strutStyle] = value;
+      this.markNeedsLayout();
+    }
+    get textWidthBasis() {
+      return this[_textWidthBasis];
+    }
+    set textWidthBasis(value) {
+      if (value == null) dart.nullFailed(I[6], 345, 37, "value");
+      if (!(value != null)) dart.assertFailed(null, I[6], 346, 12, "value != null");
+      if (this[_textWidthBasis] == value) return;
+      this[_textWidthBasis] = value;
+      this.markNeedsLayout();
+    }
+    get textHeightBehavior() {
+      return this[_textHeightBehavior];
+    }
+    set textHeightBehavior(value) {
+      if (dart.equals(this[_textHeightBehavior], value)) return;
+      this[_textHeightBehavior] = value;
+      this.markNeedsLayout();
+    }
+    get inlinePlaceholderBoxes() {
+      return this[_inlinePlaceholderBoxes];
+    }
+    get inlinePlaceholderScales() {
+      return this[_inlinePlaceholderScales];
+    }
+    setPlaceholderDimensions(value) {
+      if (value == null || dart.test(value[$isEmpty]) || dart.test(collections.listEquals(text_painter.PlaceholderDimensions, value, this[_placeholderDimensions]))) {
+        return;
+      }
+      if (!(dart.fn(() => {
+        let placeholderCount = 0;
+        dart.nullCheck(this.text).visitChildren(dart.fn(span => {
+          if (span == null) dart.nullFailed(I[6], 398, 39, "span");
+          if (placeholder_span.PlaceholderSpan.is(span)) {
+            placeholderCount = placeholderCount + 1;
+          }
+          return true;
+        }, T.InlineSpanTobool()));
+        return placeholderCount;
+      }, T.VoidToint())() == value[$length])) dart.assertFailed(null, I[6], 396, 12, "() {\r\n      int placeholderCount = 0;\r\n      text!.visitChildren((InlineSpan span) {\r\n        if (span is PlaceholderSpan) {\r\n          placeholderCount += 1;\r\n        }\r\n        return true;\r\n      });\r\n      return placeholderCount;\r\n    }() == value.length");
+      this[_placeholderDimensions] = value;
+      this.markNeedsLayout();
+    }
+    [_createParagraphStyle](defaultTextDirection = null) {
+      let t1, t0, t1$, t0$;
+      if (!(this.textAlign != null)) dart.assertFailed(null, I[6], 414, 12, "textAlign != null");
+      if (!(this.textDirection != null || defaultTextDirection != null)) dart.assertFailed("TextPainter.textDirection must be set to a non-null value before using the TextPainter.", I[6], 415, 12, "textDirection != null || defaultTextDirection != null");
+      t0$ = (t0 = dart.nullCheck(this[_text]).style, t0 == null ? null : t0.getParagraphStyle({textAlign: this.textAlign, textDirection: (t1 = this.textDirection, t1 == null ? defaultTextDirection : t1), textScaleFactor: this.textScaleFactor, maxLines: this[_maxLines], textHeightBehavior: this[_textHeightBehavior], ellipsis: this[_ellipsis], locale: this[_locale], strutStyle: this[_strutStyle]}));
+      return t0$ == null ? ui.ParagraphStyle.new({textAlign: this.textAlign, textDirection: (t1$ = this.textDirection, t1$ == null ? defaultTextDirection : t1$), fontSize: 14 * dart.notNull(this.textScaleFactor), maxLines: this.maxLines, textHeightBehavior: this[_textHeightBehavior], ellipsis: this.ellipsis, locale: this.locale}) : t0$;
+    }
+    get preferredLineHeight() {
+      let t0, t0$;
+      if (this[_layoutTemplate] == null) {
+        let builder = ui.ParagraphBuilder.new(this[_createParagraphStyle](ui.TextDirection.rtl));
+        if ((t0 = this.text, t0 == null ? null : t0.style) != null) builder.pushStyle(dart.nullCheck(dart.nullCheck(this.text).style).getTextStyle({textScaleFactor: this.textScaleFactor}));
+        builder.addText(" ");
+        this[_layoutTemplate] = (t0$ = builder.build(), (() => {
+          t0$.layout(C[9] || CT.C9);
+          return t0$;
+        })());
+      }
+      return dart.nullCheck(this[_layoutTemplate]).height;
+    }
+    [_applyFloatingPointHack](layoutValue) {
+      if (layoutValue == null) dart.nullFailed(I[6], 472, 41, "layoutValue");
+      return layoutValue[$ceilToDouble]();
+    }
+    get minIntrinsicWidth() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 481, 12, "!_needsLayout");
+      return this[_applyFloatingPointHack](dart.nullCheck(this[_paragraph]).minIntrinsicWidth);
+    }
+    get maxIntrinsicWidth() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 489, 12, "!_needsLayout");
+      return this[_applyFloatingPointHack](dart.nullCheck(this[_paragraph]).maxIntrinsicWidth);
+    }
+    get width() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 497, 12, "!_needsLayout");
+      return this[_applyFloatingPointHack](this.textWidthBasis == text_painter.TextWidthBasis.longestLine ? dart.nullCheck(this[_paragraph]).longestLine : dart.nullCheck(this[_paragraph]).width);
+    }
+    get height() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 507, 12, "!_needsLayout");
+      return this[_applyFloatingPointHack](dart.nullCheck(this[_paragraph]).height);
+    }
+    get size() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 515, 12, "!_needsLayout");
+      return new ui.Size.new(this.width, this.height);
+    }
+    computeDistanceToActualBaseline(baseline) {
+      if (baseline == null) dart.nullFailed(I[6], 523, 55, "baseline");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 524, 12, "!_needsLayout");
+      if (!(baseline != null)) dart.assertFailed(null, I[6], 525, 12, "baseline != null");
+      switch (baseline) {
+        case C[10] || CT.C10:
+        {
+          return dart.nullCheck(this[_paragraph]).alphabeticBaseline;
+        }
+        case C[11] || CT.C11:
+        {
+          return dart.nullCheck(this[_paragraph]).ideographicBaseline;
+        }
+        default:
+        {
+          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+        }
+      }
+    }
+    get didExceedMaxLines() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 546, 12, "!_needsLayout");
+      return dart.nullCheck(this[_paragraph]).didExceedMaxLines;
+    }
+    layout(opts) {
+      let minWidth = opts && 'minWidth' in opts ? opts.minWidth : 0;
+      if (minWidth == null) dart.nullFailed(I[6], 561, 24, "minWidth");
+      let maxWidth = opts && 'maxWidth' in opts ? opts.maxWidth : 1 / 0;
+      if (maxWidth == null) dart.nullFailed(I[6], 561, 47, "maxWidth");
+      if (!(this.text != null)) dart.assertFailed("TextPainter.text must be set to a non-null value before using the TextPainter.", I[6], 562, 12, "text != null");
+      if (!(this.textDirection != null)) dart.assertFailed("TextPainter.textDirection must be set to a non-null value before using the TextPainter.", I[6], 563, 12, "textDirection != null");
+      if (!dart.test(this[_needsLayout]) && minWidth == this[_lastMinWidth] && maxWidth == this[_lastMaxWidth]) return;
+      this[_needsLayout] = false;
+      if (this[_paragraph] == null) {
+        let builder = ui.ParagraphBuilder.new(this[_createParagraphStyle]());
+        dart.nullCheck(this[_text]).build(builder, {textScaleFactor: this.textScaleFactor, dimensions: this[_placeholderDimensions]});
+        this[_inlinePlaceholderScales] = builder.placeholderScales;
+        this[_paragraph] = builder.build();
+      }
+      this[_lastMinWidth] = minWidth;
+      this[_lastMaxWidth] = maxWidth;
+      this[_previousCaretPosition] = null;
+      this[_previousCaretPrototype] = null;
+      dart.nullCheck(this[_paragraph]).layout(new ui.ParagraphConstraints.new({width: maxWidth}));
+      if (minWidth != maxWidth) {
+        let newWidth = null;
+        switch (this.textWidthBasis) {
+          case C[6] || CT.C6:
+          {
+            newWidth = this[_applyFloatingPointHack](dart.nullCheck(this[_paragraph]).longestLine);
+            break;
+          }
+          case C[5] || CT.C5:
+          {
+            newWidth = this.maxIntrinsicWidth;
+            break;
+          }
+          default:
+          {
+            dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+          }
+        }
+        newWidth = newWidth[$clamp](minWidth, maxWidth);
+        if (newWidth != this[_applyFloatingPointHack](dart.nullCheck(this[_paragraph]).width)) {
+          dart.nullCheck(this[_paragraph]).layout(new ui.ParagraphConstraints.new({width: newWidth}));
+        }
+      }
+      this[_inlinePlaceholderBoxes] = dart.nullCheck(this[_paragraph]).getBoxesForPlaceholders();
+    }
+    paint(canvas, offset) {
+      if (canvas == null) dart.nullFailed(I[6], 614, 21, "canvas");
+      if (offset == null) dart.nullFailed(I[6], 614, 36, "offset");
+      if (!dart.test(dart.fn(() => {
+        if (dart.test(this[_needsLayout])) {
+          dart.throw(assertions.FlutterError.new("TextPainter.paint called when text geometry was not yet calculated.\n" + "Please call layout() before paint() to position the text before painting it."));
+        }
+        return true;
+      }, T.VoidTobool())())) dart.assertFailed(null, I[6], 615, 12, "() {\r\n      if (_needsLayout) {\r\n        throw FlutterError(\r\n          'TextPainter.paint called when text geometry was not yet calculated.\\n'\r\n          'Please call layout() before paint() to position the text before painting it.'\r\n        );\r\n      }\r\n      return true;\r\n    }()");
+      canvas.drawParagraph(dart.nullCheck(this[_paragraph]), offset);
+    }
+    static _isUtf16Surrogate(value) {
+      if (value == null) dart.nullFailed(I[6], 632, 37, "value");
+      return (dart.notNull(value) & 63488) === 55296;
+    }
+    static _isUnicodeDirectionality(value) {
+      if (value == null) dart.nullFailed(I[6], 640, 44, "value");
+      return value === 8207 || value === 8206;
+    }
+    getOffsetAfter(offset) {
+      if (offset == null) dart.nullFailed(I[6], 646, 27, "offset");
+      let nextCodeUnit = dart.nullCheck(this[_text]).codeUnitAt(offset);
+      if (nextCodeUnit == null) return null;
+      return dart.test(text_painter.TextPainter._isUtf16Surrogate(nextCodeUnit)) ? dart.notNull(offset) + 2 : dart.notNull(offset) + 1;
+    }
+    getOffsetBefore(offset) {
+      if (offset == null) dart.nullFailed(I[6], 656, 28, "offset");
+      let prevCodeUnit = dart.nullCheck(this[_text]).codeUnitAt(dart.notNull(offset) - 1);
+      if (prevCodeUnit == null) return null;
+      return dart.test(text_painter.TextPainter._isUtf16Surrogate(prevCodeUnit)) ? dart.notNull(offset) - 2 : dart.notNull(offset) - 1;
+    }
+    [_getRectFromUpstream](offset, caretPrototype) {
+      if (offset == null) dart.nullFailed(I[6], 669, 34, "offset");
+      if (caretPrototype == null) dart.nullFailed(I[6], 669, 47, "caretPrototype");
+      let flattenedText = dart.nullCheck(this[_text]).toPlainText({includePlaceholders: false});
+      let prevCodeUnit = dart.nullCheck(this[_text]).codeUnitAt(math.max(core.int, 0, dart.notNull(offset) - 1));
+      if (prevCodeUnit == null) return null;
+      let needsSearch = dart.test(text_painter.TextPainter._isUtf16Surrogate(prevCodeUnit)) || dart.nullCheck(this[_text]).codeUnitAt(offset) === 8205 || dart.test(text_painter.TextPainter._isUnicodeDirectionality(prevCodeUnit));
+      let graphemeClusterLength = needsSearch ? 2 : 1;
+      let boxes = T.JSArrayOfTextBox().of([]);
+      while (dart.test(boxes[$isEmpty])) {
+        let prevRuneOffset = dart.notNull(offset) - graphemeClusterLength;
+        boxes = dart.nullCheck(this[_paragraph]).getBoxesForRange(prevRuneOffset, offset, {boxHeightStyle: ui.BoxHeightStyle.strut});
+        if (dart.test(boxes[$isEmpty])) {
+          if (!needsSearch) {
+            break;
+          }
+          if (prevRuneOffset < -flattenedText.length) {
+            break;
+          }
+          graphemeClusterLength = graphemeClusterLength * 2;
+          continue;
+        }
+        let box = boxes[$first];
+        if (prevCodeUnit === 10) {
+          return new ui.Rect.fromLTRB(this[_emptyOffset].dx, box.bottom, this[_emptyOffset].dx, dart.notNull(box.bottom) + dart.notNull(box.bottom) - dart.notNull(box.top));
+        }
+        let caretEnd = box.end;
+        let dx = box.direction == ui.TextDirection.rtl ? dart.notNull(caretEnd) - dart.notNull(caretPrototype.width) : caretEnd;
+        return new ui.Rect.fromLTRB(math.min(core.double, dx, dart.nullCheck(this[_paragraph]).width), box.top, math.min(core.double, dx, dart.nullCheck(this[_paragraph]).width), box.bottom);
+      }
+      return null;
+    }
+    [_getRectFromDownstream](offset, caretPrototype) {
+      if (offset == null) dart.nullFailed(I[6], 718, 36, "offset");
+      if (caretPrototype == null) dart.nullFailed(I[6], 718, 49, "caretPrototype");
+      let flattenedText = dart.nullCheck(this[_text]).toPlainText({includePlaceholders: false});
+      let nextCodeUnit = dart.nullCheck(this[_text]).codeUnitAt(math.min(core.int, offset, flattenedText.length - 1));
+      if (nextCodeUnit == null) return null;
+      let needsSearch = dart.test(text_painter.TextPainter._isUtf16Surrogate(nextCodeUnit)) || nextCodeUnit === 8205 || dart.test(text_painter.TextPainter._isUnicodeDirectionality(nextCodeUnit));
+      let graphemeClusterLength = needsSearch ? 2 : 1;
+      let boxes = T.JSArrayOfTextBox().of([]);
+      while (dart.test(boxes[$isEmpty])) {
+        let nextRuneOffset = dart.notNull(offset) + graphemeClusterLength;
+        boxes = dart.nullCheck(this[_paragraph]).getBoxesForRange(offset, nextRuneOffset, {boxHeightStyle: ui.BoxHeightStyle.strut});
+        if (dart.test(boxes[$isEmpty])) {
+          if (!needsSearch) {
+            break;
+          }
+          if (nextRuneOffset >= flattenedText.length << 1 >>> 0) {
+            break;
+          }
+          graphemeClusterLength = graphemeClusterLength * 2;
+          continue;
+        }
+        let box = boxes[$last];
+        let caretStart = box.start;
+        let dx = box.direction == ui.TextDirection.rtl ? dart.notNull(caretStart) - dart.notNull(caretPrototype.width) : caretStart;
+        return new ui.Rect.fromLTRB(math.min(core.double, dx, dart.nullCheck(this[_paragraph]).width), box.top, math.min(core.double, dx, dart.nullCheck(this[_paragraph]).width), box.bottom);
+      }
+      return null;
+    }
+    get [_emptyOffset]() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 759, 12, "!_needsLayout");
+      if (!(this.textAlign != null)) dart.assertFailed(null, I[6], 760, 12, "textAlign != null");
+      switch (this.textAlign) {
+        case C[12] || CT.C12:
+        {
+          return ui.Offset.zero;
+        }
+        case C[13] || CT.C13:
+        {
+          return new ui.Offset.new(this.width, 0.0);
+        }
+        case C[14] || CT.C14:
+        {
+          return new ui.Offset.new(dart.notNull(this.width) / 2.0, 0.0);
+        }
+        case C[17] || CT.C17:
+        case C[8] || CT.C8:
+        {
+          if (!(this.textDirection != null)) dart.assertFailed(null, I[6], 770, 16, "textDirection != null");
+          switch (dart.nullCheck(this.textDirection)) {
+            case C[15] || CT.C15:
+            {
+              return new ui.Offset.new(this.width, 0.0);
+            }
+            case C[16] || CT.C16:
+            {
+              return ui.Offset.zero;
+            }
+            default:
+            {
+              dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+            }
+          }
+        }
+        case C[18] || CT.C18:
+        {
+          if (!(this.textDirection != null)) dart.assertFailed(null, I[6], 778, 16, "textDirection != null");
+          switch (dart.nullCheck(this.textDirection)) {
+            case C[15] || CT.C15:
+            {
+              return ui.Offset.zero;
+            }
+            case C[16] || CT.C16:
+            {
+              return new ui.Offset.new(this.width, 0.0);
+            }
+            default:
+            {
+              dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+            }
+          }
+        }
+        default:
+        {
+          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+        }
+      }
+    }
+    getOffsetForCaret(position, caretPrototype) {
+      if (position == null) dart.nullFailed(I[6], 791, 41, "position");
+      if (caretPrototype == null) dart.nullFailed(I[6], 791, 56, "caretPrototype");
+      this[_computeCaretMetrics](position, caretPrototype);
+      return this[_caretMetrics].offset;
+    }
+    getFullHeightForCaret(position, caretPrototype) {
+      if (position == null) dart.nullFailed(I[6], 801, 46, "position");
+      if (caretPrototype == null) dart.nullFailed(I[6], 801, 61, "caretPrototype");
+      this[_computeCaretMetrics](position, caretPrototype);
+      return this[_caretMetrics].fullHeight;
+    }
+    get [_caretMetrics]() {
+      let t0;
+      return dart.test(this[__TextPainter__caretMetrics_isSet]) ? (t0 = this[__TextPainter__caretMetrics], t0) : dart.throw(new _internal.LateError.fieldNI("_caretMetrics"));
+    }
+    set [_caretMetrics](t0) {
+      if (t0 == null) dart.nullFailed(I[6], 809, 22, "null");
+      this[__TextPainter__caretMetrics_isSet] = true;
+      this[__TextPainter__caretMetrics] = t0;
+    }
+    [_computeCaretMetrics](position, caretPrototype) {
+      let t1, t1$;
+      if (position == null) dart.nullFailed(I[6], 819, 42, "position");
+      if (caretPrototype == null) dart.nullFailed(I[6], 819, 57, "caretPrototype");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 820, 12, "!_needsLayout");
+      if (dart.equals(position, this[_previousCaretPosition]) && dart.equals(caretPrototype, this[_previousCaretPrototype])) return;
+      let offset = position.offset;
+      if (!(position.affinity != null)) dart.assertFailed(null, I[6], 824, 12, "position.affinity != null");
+      let rect = null;
+      switch (position.affinity) {
+        case C[19] || CT.C19:
+        {
+          {
+            rect = (t1 = this[_getRectFromUpstream](offset, caretPrototype), t1 == null ? this[_getRectFromDownstream](offset, caretPrototype) : t1);
+            break;
+          }
+        }
+        case C[20] || CT.C20:
+        {
+          {
+            rect = (t1$ = this[_getRectFromDownstream](offset, caretPrototype), t1$ == null ? this[_getRectFromUpstream](offset, caretPrototype) : t1$);
+            break;
+          }
+        }
+        default:
+        {
+          dart.throw(new _internal.ReachabilityError.new("`null` encountered as case in a switch expression with a non-nullable enum type."));
+        }
+      }
+      this[_caretMetrics] = new text_painter._CaretMetrics.new({offset: rect != null ? new ui.Offset.new(rect.left, rect.top) : this[_emptyOffset], fullHeight: rect != null ? dart.notNull(rect.bottom) - dart.notNull(rect.top) : null});
+      this[_previousCaretPosition] = position;
+      this[_previousCaretPrototype] = caretPrototype;
+    }
+    getBoxesForSelection(selection, opts) {
+      if (selection == null) dart.nullFailed(I[6], 857, 19, "selection");
+      let boxHeightStyle = opts && 'boxHeightStyle' in opts ? opts.boxHeightStyle : C[21] || CT.C21;
+      if (boxHeightStyle == null) dart.nullFailed(I[6], 858, 23, "boxHeightStyle");
+      let boxWidthStyle = opts && 'boxWidthStyle' in opts ? opts.boxWidthStyle : C[22] || CT.C22;
+      if (boxWidthStyle == null) dart.nullFailed(I[6], 859, 22, "boxWidthStyle");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 861, 12, "!_needsLayout");
+      if (!(boxHeightStyle != null)) dart.assertFailed(null, I[6], 862, 12, "boxHeightStyle != null");
+      if (!(boxWidthStyle != null)) dart.assertFailed(null, I[6], 863, 12, "boxWidthStyle != null");
+      return dart.nullCheck(this[_paragraph]).getBoxesForRange(selection.start, selection.end, {boxHeightStyle: boxHeightStyle, boxWidthStyle: boxWidthStyle});
+    }
+    getPositionForOffset(offset) {
+      if (offset == null) dart.nullFailed(I[6], 873, 44, "offset");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 874, 12, "!_needsLayout");
+      return dart.nullCheck(this[_paragraph]).getPositionForOffset(offset);
+    }
+    getWordBoundary(position) {
+      if (position == null) dart.nullFailed(I[6], 885, 42, "position");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 886, 12, "!_needsLayout");
+      return dart.nullCheck(this[_paragraph]).getWordBoundary(position);
+    }
+    getLineBoundary(position) {
+      if (position == null) dart.nullFailed(I[6], 893, 42, "position");
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 894, 12, "!_needsLayout");
+      return dart.nullCheck(this[_paragraph]).getLineBoundary(position);
+    }
+    computeLineMetrics() {
+      if (!!dart.test(this[_needsLayout])) dart.assertFailed(null, I[6], 914, 12, "!_needsLayout");
+      return dart.nullCheck(this[_paragraph]).computeLineMetrics();
+    }
+  };
+  (text_painter.TextPainter.new = function(opts) {
+    let text = opts && 'text' in opts ? opts.text : null;
+    let textAlign = opts && 'textAlign' in opts ? opts.textAlign : C[8] || CT.C8;
+    if (textAlign == null) dart.nullFailed(I[6], 145, 15, "textAlign");
+    let textDirection = opts && 'textDirection' in opts ? opts.textDirection : null;
+    let textScaleFactor = opts && 'textScaleFactor' in opts ? opts.textScaleFactor : 1;
+    if (textScaleFactor == null) dart.nullFailed(I[6], 147, 12, "textScaleFactor");
+    let maxLines = opts && 'maxLines' in opts ? opts.maxLines : null;
+    let ellipsis = opts && 'ellipsis' in opts ? opts.ellipsis : null;
+    let locale = opts && 'locale' in opts ? opts.locale : null;
+    let strutStyle = opts && 'strutStyle' in opts ? opts.strutStyle : null;
+    let textWidthBasis = opts && 'textWidthBasis' in opts ? opts.textWidthBasis : C[5] || CT.C5;
+    if (textWidthBasis == null) dart.nullFailed(I[6], 152, 20, "textWidthBasis");
+    let textHeightBehavior = opts && 'textHeightBehavior' in opts ? opts.textHeightBehavior : null;
+    this[_paragraph] = null;
+    this[_needsLayout] = true;
+    this[_layoutTemplate] = null;
+    this[_inlinePlaceholderBoxes] = null;
+    this[_inlinePlaceholderScales] = null;
+    this[_placeholderDimensions] = null;
+    this[_lastMinWidth] = null;
+    this[_lastMaxWidth] = null;
+    this[__TextPainter__caretMetrics] = null;
+    this[__TextPainter__caretMetrics_isSet] = false;
+    this[_previousCaretPosition] = null;
+    this[_previousCaretPrototype] = null;
+    if (!(text == null || dart.test(text.debugAssertIsValid()))) dart.assertFailed(null, I[6], 154, 15, "text == null || text.debugAssertIsValid()");
+    if (!(textAlign != null)) dart.assertFailed(null, I[6], 155, 15, "textAlign != null");
+    if (!(textScaleFactor != null)) dart.assertFailed(null, I[6], 156, 15, "textScaleFactor != null");
+    if (!(maxLines == null || dart.notNull(maxLines) > 0)) dart.assertFailed(null, I[6], 157, 15, "maxLines == null || maxLines > 0");
+    if (!(textWidthBasis != null)) dart.assertFailed(null, I[6], 158, 15, "textWidthBasis != null");
+    this[_text] = text;
+    this[_textAlign] = textAlign;
+    this[_textDirection] = textDirection;
+    this[_textScaleFactor] = textScaleFactor;
+    this[_maxLines] = maxLines;
+    this[_ellipsis] = ellipsis;
+    this[_locale] = locale;
+    this[_strutStyle] = strutStyle;
+    this[_textWidthBasis] = textWidthBasis;
+    this[_textHeightBehavior] = textHeightBehavior;
+    ;
+  }).prototype = text_painter.TextPainter.prototype;
+  dart.addTypeTests(text_painter.TextPainter);
+  dart.addTypeCaches(text_painter.TextPainter);
+  dart.setMethodSignature(text_painter.TextPainter, () => ({
+    __proto__: dart.getMethods(text_painter.TextPainter.__proto__),
+    markNeedsLayout: dart.fnType(dart.void, []),
+    setPlaceholderDimensions: dart.fnType(dart.void, [dart.nullable(core.List$(text_painter.PlaceholderDimensions))]),
+    [_createParagraphStyle]: dart.fnType(ui.ParagraphStyle, [], [dart.nullable(ui.TextDirection)]),
+    [_applyFloatingPointHack]: dart.fnType(core.double, [core.double]),
+    computeDistanceToActualBaseline: dart.fnType(core.double, [ui.TextBaseline]),
+    layout: dart.fnType(dart.void, [], {maxWidth: core.double, minWidth: core.double}, {}),
+    paint: dart.fnType(dart.void, [ui.Canvas, ui.Offset]),
+    getOffsetAfter: dart.fnType(dart.nullable(core.int), [core.int]),
+    getOffsetBefore: dart.fnType(dart.nullable(core.int), [core.int]),
+    [_getRectFromUpstream]: dart.fnType(dart.nullable(ui.Rect), [core.int, ui.Rect]),
+    [_getRectFromDownstream]: dart.fnType(dart.nullable(ui.Rect), [core.int, ui.Rect]),
+    getOffsetForCaret: dart.fnType(ui.Offset, [ui.TextPosition, ui.Rect]),
+    getFullHeightForCaret: dart.fnType(dart.nullable(core.double), [ui.TextPosition, ui.Rect]),
+    [_computeCaretMetrics]: dart.fnType(dart.void, [ui.TextPosition, ui.Rect]),
+    getBoxesForSelection: dart.fnType(core.List$(ui.TextBox), [text_editing.TextSelection], {boxHeightStyle: ui.BoxHeightStyle, boxWidthStyle: ui.BoxWidthStyle}, {}),
+    getPositionForOffset: dart.fnType(ui.TextPosition, [ui.Offset]),
+    getWordBoundary: dart.fnType(ui.TextRange, [ui.TextPosition]),
+    getLineBoundary: dart.fnType(ui.TextRange, [ui.TextPosition]),
+    computeLineMetrics: dart.fnType(core.List$(ui.LineMetrics), [])
+  }));
+  dart.setGetterSignature(text_painter.TextPainter, () => ({
+    __proto__: dart.getGetters(text_painter.TextPainter.__proto__),
+    text: dart.nullable(inline_span.InlineSpan),
+    textAlign: ui.TextAlign,
+    textDirection: dart.nullable(ui.TextDirection),
+    textScaleFactor: core.double,
+    ellipsis: dart.nullable(core.String),
+    locale: dart.nullable(ui.Locale),
+    maxLines: dart.nullable(core.int),
+    strutStyle: dart.nullable(strut_style.StrutStyle),
+    textWidthBasis: text_painter.TextWidthBasis,
+    textHeightBehavior: dart.nullable(ui.TextHeightBehavior),
+    inlinePlaceholderBoxes: dart.nullable(core.List$(ui.TextBox)),
+    inlinePlaceholderScales: dart.nullable(core.List$(core.double)),
+    preferredLineHeight: core.double,
+    minIntrinsicWidth: core.double,
+    maxIntrinsicWidth: core.double,
+    width: core.double,
+    height: core.double,
+    size: ui.Size,
+    didExceedMaxLines: core.bool,
+    [_emptyOffset]: ui.Offset,
+    [_caretMetrics]: text_painter._CaretMetrics
+  }));
+  dart.setSetterSignature(text_painter.TextPainter, () => ({
+    __proto__: dart.getSetters(text_painter.TextPainter.__proto__),
+    text: dart.nullable(inline_span.InlineSpan),
+    textAlign: ui.TextAlign,
+    textDirection: dart.nullable(ui.TextDirection),
+    textScaleFactor: core.double,
+    ellipsis: dart.nullable(core.String),
+    locale: dart.nullable(ui.Locale),
+    maxLines: dart.nullable(core.int),
+    strutStyle: dart.nullable(strut_style.StrutStyle),
+    textWidthBasis: text_painter.TextWidthBasis,
+    textHeightBehavior: dart.nullable(ui.TextHeightBehavior),
+    [_caretMetrics]: text_painter._CaretMetrics
+  }));
+  dart.setLibraryUri(text_painter.TextPainter, I[7]);
+  dart.setFieldSignature(text_painter.TextPainter, () => ({
+    __proto__: dart.getFields(text_painter.TextPainter.__proto__),
+    [_paragraph]: dart.fieldType(dart.nullable(ui.Paragraph)),
+    [_needsLayout]: dart.fieldType(core.bool),
+    [_text]: dart.fieldType(dart.nullable(inline_span.InlineSpan)),
+    [_textAlign]: dart.fieldType(ui.TextAlign),
+    [_textDirection]: dart.fieldType(dart.nullable(ui.TextDirection)),
+    [_textScaleFactor]: dart.fieldType(core.double),
+    [_ellipsis]: dart.fieldType(dart.nullable(core.String)),
+    [_locale]: dart.fieldType(dart.nullable(ui.Locale)),
+    [_maxLines]: dart.fieldType(dart.nullable(core.int)),
+    [_strutStyle]: dart.fieldType(dart.nullable(strut_style.StrutStyle)),
+    [_textWidthBasis]: dart.fieldType(text_painter.TextWidthBasis),
+    [_textHeightBehavior]: dart.fieldType(dart.nullable(ui.TextHeightBehavior)),
+    [_layoutTemplate]: dart.fieldType(dart.nullable(ui.Paragraph)),
+    [_inlinePlaceholderBoxes]: dart.fieldType(dart.nullable(core.List$(ui.TextBox))),
+    [_inlinePlaceholderScales]: dart.fieldType(dart.nullable(core.List$(core.double))),
+    [_placeholderDimensions]: dart.fieldType(dart.nullable(core.List$(text_painter.PlaceholderDimensions))),
+    [_lastMinWidth]: dart.fieldType(dart.nullable(core.double)),
+    [_lastMaxWidth]: dart.fieldType(dart.nullable(core.double)),
+    [__TextPainter__caretMetrics]: dart.fieldType(dart.nullable(text_painter._CaretMetrics)),
+    [__TextPainter__caretMetrics_isSet]: dart.fieldType(core.bool),
+    [_previousCaretPosition]: dart.fieldType(dart.nullable(ui.TextPosition)),
+    [_previousCaretPrototype]: dart.fieldType(dart.nullable(ui.Rect))
+  }));
+  dart.defineLazy(text_painter.TextPainter, {
+    /*text_painter.TextPainter._zwjUtf16*/get _zwjUtf16() {
+      return 8205;
+    }
+  }, false);
+  dart.defineLazy(text_painter, {
+    /*text_painter._kDefaultFontSize*/get _kDefaultFontSize() {
+      return 14;
+    }
+  }, false);
+  dart.trackLibraries("packages/flutter/src/painting/placeholder_span.dart", {
+    "package:flutter/src/painting/placeholder_span.dart": placeholder_span,
+    "package:flutter/src/painting/text_span.dart": text_span,
+    "package:flutter/src/painting/inline_span.dart": inline_span,
+    "package:flutter/src/painting/text_painter.dart": text_painter
   }, {
-  }, '{"version":3,"sourceRoot":"","sources":["borders.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../packages/flutter/src/painting/borders.dart.lib.js"}');
+  }, '{"version":3,"sourceRoot":"","sources":["inline_span.dart","placeholder_span.dart","text_span.dart","text_painter.dart"],"names":[],"mappings":"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","file":"../../../../../../../../../packages/flutter/src/painting/placeholder_span.dart.lib.js"}');
   // Exports:
   return {
-    src__painting__borders: borders$
+    src__painting__placeholder_span: placeholder_span,
+    src__painting__text_span: text_span,
+    src__painting__inline_span: inline_span,
+    src__painting__text_painter: text_painter
   };
 }));
 
-//# sourceMappingURL=borders.dart.lib.js.map
+//# sourceMappingURL=placeholder_span.dart.lib.js.map
