@@ -1,4 +1,4 @@
-#Wed May 05 11:47:45 GST 2021
-base.0=C\:\\Users\\Zax\\Documents\\FlutterProject\\genshin_android_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Fri May 07 08:24:21 MUT 2021
+base.0=C\:\\wamp64\\www\\Flutter_GenshinSS\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
