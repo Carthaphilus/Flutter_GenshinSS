@@ -1,21 +1,40 @@
+import 'package:genshin_android_app/models/ArmeType.dart';
 
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'ArmeType.dart';
 
-
-
-class URLS {
-  static const String BASE_URL = 'http://127.0.0.1:8000/api';
-}
 class Armes {
+  int _armeId;
+  String _nomArme;
+  String _imageArme;
+  int _rarete;
 
-//armes
-  static Future<List<dynamic>> getArmes() async {
-    final response = await http.get('${URLS.BASE_URL}/armes');
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      return null;
-    }
+  Armes(this._armeId, this._nomArme, this._imageArme, this._rarete);
+
+  factory Armes.fromJson(Map<String, dynamic> json){
+    return Armes(json["armeId"], json["nomArme"], json["imageArme"], json["rarete"]);
+  }
+
+  int get rarete => _rarete;
+
+  set rarete(int value) {
+    _rarete = value;
+  }
+
+  String get imageArme => _imageArme;
+
+  set imageArme(String value) {
+    _imageArme = value;
+  }
+
+  String get nomArme => _nomArme;
+
+  set nomArme(String value) {
+    _nomArme = value;
+  }
+
+  int get armeId => _armeId;
+
+  set armeId(int value) {
+    _armeId = value;
   }
 }
