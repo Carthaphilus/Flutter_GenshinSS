@@ -118,11 +118,15 @@ class _firstStepPageState extends State<firstStepPage> {
                         ),
                         ElevatedButton(
                             onPressed: (){
-                              Navigator.pushNamed(
+                              if(selectedPersonnage != null && selectedArme != null) {
+                                Navigator.pushNamed(
                                   context,
                                   '/second',
-                                arguments: [selectedPersonnage, selectedArme],
-                              );
+                                  arguments: [selectedPersonnage, selectedArme],
+                                );
+                              }else{
+                                _showMyDialog();
+                              }
                             },
                             child: Text("Suivant")
                         )
@@ -168,5 +172,32 @@ class _firstStepPageState extends State<firstStepPage> {
     } else {
       return null;
     }
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erreur: Champ incomplet'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Veullez remplir l\'ensemble des champs précédents'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

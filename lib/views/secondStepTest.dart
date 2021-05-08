@@ -18,10 +18,20 @@ class secondStepPage extends StatefulWidget {
 class _secondStepPageState extends State<secondStepPage> {
 
   final _formKey = GlobalKey<FormState>();
-  String val1;
-  String val2;
-  String val3;
-  String val4;
+  String pvMax;
+  String atk;
+  String def;
+  String me;
+  String tc;
+  String dc;
+  String dPyro;
+  String dHydro;
+  String dDendro;
+  String dElectro;
+  String dAnemo;
+  String dCryo;
+  String dGeo;
+  String dPhys;
 
   @override
   Widget build(BuildContext context) {
@@ -65,72 +75,76 @@ class _secondStepPageState extends State<secondStepPage> {
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'PV max',
                                   labelText: 'PV max *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val1 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  pvMax = value;
+                                  return numberValidator(pvMax);
                                 },
                               ),
                               SizedBox(height: 10),
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'ATQ',
                                   labelText: 'ATQ *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val2 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  atk = value;
+                                  return numberValidator(atk);
                                 },
                               ),
                               SizedBox(height: 10),
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.shield),
+                                  icon: Icon(Icons.shield,size: 30),
                                   hintText: 'DEF',
                                   labelText: 'DEF *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val3 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  def = value;
+                                  return numberValidator(def);
                                 },
                               ),
                               SizedBox(height: 10),
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'Maitrise élémentaire',
                                   labelText: 'Maitrise élémentaire *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val4 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  me = value;
+                                  return numberValidator(me);
                                 },
                               ),
                               Divider(),
@@ -138,36 +152,38 @@ class _secondStepPageState extends State<secondStepPage> {
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'Taux critique',
                                   labelText: 'Taux critique *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val1 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  tc = value;
+                                  return numberValidator(tc);
                                 },
                               ),
                               SizedBox(height: 10),
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'DGT critique',
                                   labelText: 'DGT critique *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val2 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dc = value;
+                                  return numberValidator(dc);
                                 },
                               ),
                               Divider(),
@@ -184,14 +200,16 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Pyro',
                                   labelText: 'DGT Pyro *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                //r"^\d+[,|\.]\d?$"
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val1 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dPyro = value;
+                                  return numberValidator(dPyro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -207,14 +225,15 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Hydro',
                                   labelText: 'DGT Hydro *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val2 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dHydro = value;
+                                  return numberValidator(dHydro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -230,14 +249,15 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Dendro',
                                   labelText: 'DGT Dendro *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val3 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dDendro = value;
+                                  return numberValidator(dDendro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -254,14 +274,15 @@ class _secondStepPageState extends State<secondStepPage> {
                                   labelText: 'DGT Electro *',
 
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val4 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dElectro = value;
+                                  return numberValidator(dElectro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -277,14 +298,15 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Anémo',
                                   labelText: 'DGT Anémo *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val1 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dAnemo = value;
+                                  return numberValidator(dAnemo);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -300,14 +322,15 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Cryo',
                                   labelText: 'DGT Cryo *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val2 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dCryo = value;
+                                  return numberValidator(dCryo);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -323,33 +346,35 @@ class _secondStepPageState extends State<secondStepPage> {
                                   hintText: 'DGT Geo',
                                   labelText: 'DGT Geo *',
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val3 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dGeo = value;
+                                  return numberValidator(dGeo);
                                 },
                               ),
                               SizedBox(height: 10),
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  icon: Icon(Icons.stacked_bar_chart),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
                                   hintText: 'DGT Physique',
                                   labelText: 'DGT Physique *',
 
                                 ),
-                                keyboardType: TextInputType.phone,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 onSaved: (String value) {
                                   // This optional block of code can be used to run
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  val4 = value;
-                                  return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+                                  dPhys = value;
+                                  return numberValidator(dPhys);
                                 },
                               ),
                               ElevatedButton(
@@ -358,12 +383,13 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // the form is invalid.
                                   if (_formKey.currentState.validate()) {
                                     // Process data.
-                                    if (val1 == "" || val2 == "" || val3 == "" || val4 == "")
+                                    if (verifChamp() == false)
                                     {
                                       Alert(context: context, title: "Erreur", desc: "Vous n'avez pas remplie l'ensemble des champs.").show();
                                     }
                                     else{
-                                      secondtStepController.Calculstat(val1,val2,val3,val4);
+                                      print("test");
+                                      secondtStepController.Calculstat(pvMax,atk,def,me);
                                     }
                                   }
                                 },
@@ -379,5 +405,36 @@ class _secondStepPageState extends State<secondStepPage> {
             ]
         )
     );
+  }
+  verifChamp(){
+    if(pvMax != "" &&
+        atk != "" &&
+        def != "" &&
+        me != "" &&
+        tc != "" &&
+        dc != "" &&
+        dPyro != "" &&
+        dHydro != "" &&
+        dDendro != "" &&
+        dElectro != "" &&
+        dAnemo != "" &&
+        dCryo != "" &&
+        dGeo != "" &&
+        dPhys != "" ){
+        return true;
+    }else{
+      return false;
+    }
+  }
+
+  String numberValidator(String value) {
+    if(value == null) {
+      return null;
+    }
+    final n = num.tryParse(value);
+    if(n == null) {
+      return '"$value" n\'est pas un nombre valide.';
+    }
+    return null;
   }
 }
