@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/models/Armes.dart';
 
-import '../globals.dart';
+import 'package:genshin_android_app/globals.dart';
 
 
 class firstStepPage extends StatefulWidget {
@@ -46,13 +46,13 @@ class _firstStepPageState extends State<firstStepPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Image.asset(
-                              selectedPersonnage == null ? 'images/Character_Aether_Thumb.jpg' : 'images/'+selectedPersonnage.image ,
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Image.asset(
+                              selectedPersonnage == null ? 'images/personnages/cards/Character_Aether_Thumb.jpg' : 'images/personnages/cards/'+selectedPersonnage.image ,
                               width: 200,
                               height: 400,
                               fit: BoxFit.cover,
-                          )
+                            )
                         ),
                         DropdownButton(
                           hint: new Text("Selectionner le personnage"),
@@ -116,6 +116,16 @@ class _firstStepPageState extends State<firstStepPage> {
                             });
                           },
                         ),
+                        ElevatedButton(
+                            onPressed: (){
+                              Navigator.pushNamed(
+                                  context,
+                                  '/second',
+                                arguments: [selectedPersonnage, selectedArme],
+                              );
+                            },
+                            child: Text("Suivant")
+                        )
                       ],
                     ),
                   )

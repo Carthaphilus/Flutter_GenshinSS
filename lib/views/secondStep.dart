@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/controller/secondStepController.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -119,11 +118,7 @@ class _secondStepPageState extends State<secondStepPage> {
                         // Process data.
                         if (val1 == "" || val2 == "" || val3 == "" || val4 == "")
                         {
-
                           Alert(context: context, title: "Erreur", desc: "Vous n'avez pas remplie l'ensemble des champs.").show();
-
-
-
                         }
                         else{
                           secondtStepController.Calculstat(val1,val2,val3,val4);
@@ -131,7 +126,7 @@ class _secondStepPageState extends State<secondStepPage> {
                         }
                       }
                     },
-                    child: Text('Submit'),
+                    child: Text('Suivant'),
                   )
                 ],
               ),

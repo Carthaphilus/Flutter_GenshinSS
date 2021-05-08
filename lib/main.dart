@@ -3,9 +3,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:genshin_android_app/views/firstStep.dart';
-import 'package:genshin_android_app/views/secondStep.dart';
+import 'package:genshin_android_app/route/routing.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,16 +11,19 @@ void main() {
   runApp(MyApp());
 }
 
-
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        dividerTheme:  DividerThemeData(
+          space: 50,
+          thickness: 2,
+        )
       ),
-      home: firstStepPage(),
+      initialRoute: '/',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
