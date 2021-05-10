@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
-import 'package:genshin_android_app/controller/secondStepController.dart';
+import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 

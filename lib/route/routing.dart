@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/views/firstStep.dart';
-import 'package:genshin_android_app/views/secondStepTest.dart';
+import 'package:genshin_android_app/views/secondStep.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
