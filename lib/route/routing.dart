@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/views/firstStep.dart';
 import 'package:genshin_android_app/views/secondStep.dart';
+import 'package:genshin_android_app/views/thirdStep.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -16,7 +17,15 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) =>
               secondStepPage(
-                listParams: args,
+                paramOperation: args,
+              ),
+        );
+      case '/third':
+      // Validation of correct data type
+        return MaterialPageRoute(
+          builder: (_) =>
+              thirdStepPage(
+                paramOperation: args,
               ),
         );
 

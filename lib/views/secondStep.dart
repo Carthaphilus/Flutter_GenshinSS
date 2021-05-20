@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:genshin_android_app/models/ArmeNiveau.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:genshin_android_app/controller/calculateController.dart';
-import 'package:genshin_android_app/models/Personnage.dart';
-import 'package:genshin_android_app/models/Armes.dart';
+import 'package:genshin_android_app/models/ArmeNiveau.dart';
+import 'package:genshin_android_app/models/PersonnageNiveau.dart';
+import 'package:genshin_android_app/globals.dart';
 
 class secondStepPage extends StatefulWidget {
-  List<dynamic> listParams;
-  secondStepPage({Key key, this.listParams}) : super(key: key);
+  calculateController paramOperation;
+  secondStepPage({Key key, this.paramOperation}) : super(key: key);
 
   @override
   _secondStepPageState createState() => _secondStepPageState();
@@ -18,28 +21,16 @@ class secondStepPage extends StatefulWidget {
 class _secondStepPageState extends State<secondStepPage> {
 
   final _formKey = GlobalKey<FormState>();
-  String pvMax;
-  String atk;
-  String def;
-  String me;
-  String tc;
-  String dc;
-  String dPyro;
-  String dHydro;
-  String dDendro;
-  String dElectro;
-  String dAnemo;
-  String dCryo;
-  String dGeo;
-  String dPhys;
-
   calculateController operation;
+  List<dynamic> listJsonData;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    operation = new calculateController(pvMax);
+    operation = widget.paramOperation;
+    getPersonnageNiveau(operation.selectedPersonnage.personnageId.toString(), operation.pNiveau.niveau_id.toString());
+    getArmeNiveau(operation.selectedArme.armeId.toString(), operation.aNiveau.niveau_id.toString());
   }
 
   @override
@@ -47,7 +38,7 @@ class _secondStepPageState extends State<secondStepPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Gesnhin SS'),
+          title: Text('Genshin SS'),
         ),
         body:
         ListView(
@@ -68,12 +59,12 @@ class _secondStepPageState extends State<secondStepPage> {
                                   children: <Widget>[
                                     ListTile(
                                       leading: Image.asset(
-                                        'images/personnages/icones/'+widget.listParams[0].image.replaceAll('.jpg','.png'),
+                                        'images/personnages/icones/'+operation.selectedPersonnage.image.replaceAll('.jpg','.png'),
                                         width: 30,
                                         height: 30,
                                         fit: BoxFit.cover,
                                       ),
-                                      title: Text(widget.listParams[0].nom +" | "+ widget.listParams[1].nomArme),
+                                      title: Text(operation.resumeData()),
                                       subtitle: Text('Set 1 | Set 2'),
                                     ),
                                   ],
@@ -85,7 +76,7 @@ class _secondStepPageState extends State<secondStepPage> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
-                                  hintText: 'PV max',
+                                  hintText: 'PV de base du personnage',
                                   labelText: 'PV max *',
                                 ),
                                 keyboardType: TextInputType.number,
@@ -95,8 +86,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  pvMax = value;
-                                  return numberValidator(pvMax);
+                                  operation.pvMax = value;
+                                  return numberValidator(operation.pvMax);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -114,8 +105,27 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  atk = value;
-                                  return numberValidator(atk);
+                                  operation.atk = value;
+                                  return numberValidator(operation.atk);
+                                },
+                              ),
+                              SizedBox(height: 10),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  icon: Icon(Icons.stacked_bar_chart,size: 30),
+                                  hintText: 'ATQ%',
+                                  labelText: 'ATQ% *',
+                                ),
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d?'))],
+                                onSaved: (String value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                                validator: (String value) {
+                                  operation.atkP = value;
+                                  return numberValidator(operation.atkP);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -133,8 +143,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  def = value;
-                                  return numberValidator(def);
+                                  operation.def = value;
+                                  return numberValidator(operation.def);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -152,8 +162,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  me = value;
-                                  return numberValidator(me);
+                                  operation.me = value;
+                                  return numberValidator(operation.me);
                                 },
                               ),
                               Divider(),
@@ -172,8 +182,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  tc = value;
-                                  return numberValidator(tc);
+                                  operation.tc = value;
+                                  return numberValidator(operation.tc);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -191,8 +201,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dc = value;
-                                  return numberValidator(dc);
+                                  operation.dc = value;
+                                  return numberValidator(operation.dc);
                                 },
                               ),
                               Divider(),
@@ -217,8 +227,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dPyro = value;
-                                  return numberValidator(dPyro);
+                                  operation.dPyro = value;
+                                  return numberValidator(operation.dPyro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -241,8 +251,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dHydro = value;
-                                  return numberValidator(dHydro);
+                                  operation.dHydro = value;
+                                  return numberValidator(operation.dHydro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -265,8 +275,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dDendro = value;
-                                  return numberValidator(dDendro);
+                                  operation.dDendro = value;
+                                  return numberValidator(operation.dDendro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -290,8 +300,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dElectro = value;
-                                  return numberValidator(dElectro);
+                                  operation.dElectro = value;
+                                  return numberValidator(operation.dElectro);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -314,8 +324,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dAnemo = value;
-                                  return numberValidator(dAnemo);
+                                  operation.dAnemo = value;
+                                  return numberValidator(operation.dAnemo);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -338,8 +348,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dCryo = value;
-                                  return numberValidator(dCryo);
+                                  operation.dCryo = value;
+                                  return numberValidator(operation.dCryo);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -362,8 +372,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dGeo = value;
-                                  return numberValidator(dGeo);
+                                  operation.dGeo = value;
+                                  return numberValidator(operation.dGeo);
                                 },
                               ),
                               SizedBox(height: 10),
@@ -382,8 +392,8 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // code when the user saves the form.
                                 },
                                 validator: (String value) {
-                                  dPhys = value;
-                                  return numberValidator(dPhys);
+                                  operation.dPhys = value;
+                                  return numberValidator(operation.dPhys);
                                 },
                               ),
                               ElevatedButton(
@@ -391,7 +401,11 @@ class _secondStepPageState extends State<secondStepPage> {
                                   // Validate will return true if the form is valid, or false if
                                   // the form is invalid.
                                   if (_formKey.currentState.validate()) {
-                                    operation.Calculstat();
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/third',
+                                      arguments: operation,
+                                    );
                                   }
                                 },
                                 child: Text('Suivant'),
@@ -406,6 +420,39 @@ class _secondStepPageState extends State<secondStepPage> {
             ]
         )
     );
+  }
+
+  Future getPersonnageNiveau(String personnageId, String niveauId) async {
+    final response = await http.get(BASE_URL+'/personnage_niveaus?personnage='+personnageId+"&niveau="+niveauId);
+    if (response.statusCode == 200) {
+      setState(() {
+        listJsonData = json.decode(response.body);
+        for(Map<String, dynamic> uneDataJson in listJsonData){
+          PersonnageNiveau unPersonnageNiveau = new PersonnageNiveau.fromJson(uneDataJson);
+          operation.personnageNiveau = unPersonnageNiveau;
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getArmeNiveau(String armeId, String niveauId) async {
+    final response = await http.get(BASE_URL+'/arme_niveaus?arme='+armeId+"&niveau="+niveauId);
+    if (response.statusCode == 200) {
+      setState(() {
+        listJsonData = json.decode(response.body);
+        for(Map<String, dynamic> uneDataJson in listJsonData){
+          print(uneDataJson);
+          ArmeNiveau uneArmeNiveau = new ArmeNiveau.fromJson(uneDataJson);
+          operation.armeNiveau = uneArmeNiveau;
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
   }
 
   String numberValidator(String value) {

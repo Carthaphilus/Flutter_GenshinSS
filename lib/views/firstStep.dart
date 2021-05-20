@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/models/Armes.dart';
+import 'package:genshin_android_app/models/Niveau.dart';
 
 import 'package:genshin_android_app/globals.dart';
 
@@ -15,10 +17,11 @@ class firstStepPage extends StatefulWidget {
 
 class _firstStepPageState extends State<firstStepPage> {
 
-  Personnage selectedPersonnage = null;
+  calculateController operation = new calculateController();
   List<Personnage> ListPersonnage = [];
-  Armes selectedArme = null;
   List<Armes> ListArme = [];
+  List<dynamic> ListRaffinement = [];
+  List<Niveau> ListNiveau = [];
   List<dynamic> listJsonData;
 
   @override
@@ -26,118 +29,186 @@ class _firstStepPageState extends State<firstStepPage> {
     // TODO: implement initState
     super.initState();
     getPersonnages();
+    getNiveau();
+    getRaffinement();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Gesnhin SS'),
-        ),
-        body:
-        ListView(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(32),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image.asset(
-                              selectedPersonnage == null ? 'images/personnages/cards/Character_Aether_Thumb.jpg' : 'images/personnages/cards/'+selectedPersonnage.image ,
-                              width: 200,
-                              height: 400,
-                              fit: BoxFit.cover,
-                            )
-                        ),
-                        DropdownButton(
-                          hint: new Text("Selectionner le personnage"),
-                          value: selectedPersonnage,
-                          items: ListPersonnage.map((list){
-                            return DropdownMenuItem(
-                                child: Text(list.nom),
-                                value: list
-                            );
-                          },).toList(),
-                          onChanged: (newVal){
-                            setState(() {
-                              selectedPersonnage = newVal;
-                              selectedArme = null;
-                              getArmes(selectedPersonnage.armeType.armeTypeId.toString());
-                            });
-                          },
-                        ),
-                        DropdownButton(
-                          hint: new Text("Selectionner l'arme"),
-                          value: selectedArme,
-                          items: ListArme.map((list){
-                            return DropdownMenuItem(
-                                child: Text(list.nomArme),
-                                value: list
-                            );
-                          },).toList(),
-                          onChanged: (newVal){
-                            setState(() {
-                              selectedArme = newVal;
-                            });
-                          },
-                        ),
-                        DropdownButton(
-                          hint: new Text("Selectionner un set"),
-                          value: selectedPersonnage,
-                          items: ListPersonnage.map((list){
-                            return DropdownMenuItem(
-                                child: Text(list.nom),
-                                value: list
-                            );
-                          },).toList(),
-                          onChanged: (newVal){
-                            setState(() {
-                              selectedPersonnage = newVal;
-                            });
-                          },
-                        ),
-                        DropdownButton(
-                          hint: new Text("Selectionner un set"),
-                          value: selectedPersonnage,
-                          items: ListPersonnage.map((list){
-                            return DropdownMenuItem(
-                                child: Text(list.nom),
-                                value: list
-                            );
-                          },).toList(),
-                          onChanged: (newVal){
-                            setState(() {
-                              selectedPersonnage = newVal;
-                            });
-                          },
-                        ),
-                        ElevatedButton(
-                            onPressed: (){
-                              if(selectedPersonnage != null && selectedArme != null) {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/second',
-                                  arguments: [selectedPersonnage, selectedArme],
-                                );
-                              }else{
-                                _showMyDialog();
-                              }
-                            },
-                            child: Text("Suivant")
-                        )
-                      ],
-                    ),
-                  )
-                ],
+      appBar: AppBar(
+        title: Text('Genshin SS'),
+      ),
+      body:
+          ListView(
+            children: [
+              Container(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Image.asset(
+                                operation.selectedPersonnage == null ? 'images/personnages/cards/Character_Aether_Thumb.jpg' : 'images/personnages/cards/'+operation.selectedPersonnage.image ,
+                                width: 200,
+                                height: 400,
+                                fit: BoxFit.cover,
+                              )
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              DropdownButton(
+                                hint: new Text("Personnage"),
+                                value: operation.selectedPersonnage,
+                                items: ListPersonnage.map((list){
+                                  return DropdownMenuItem(
+                                      child: Text(list.nom),
+                                      value: list
+                                  );
+                                },).toList(),
+                                onChanged: (newVal){
+                                  setState(() {
+                                    operation.selectedPersonnage = newVal;
+                                    operation.selectedArme = null;
+                                    getArmes(operation.selectedPersonnage.armeType.armeTypeId.toString());
+                                  });
+                                },
+                              ),
+                              DropdownButton(
+                                hint: new Text("Niveau"),
+                                value: operation.pNiveau,
+                                items: ListNiveau.map((list){
+                                  return DropdownMenuItem(
+                                      child: Text(list.nb_niveau.toString()),
+                                      value: list
+                                  );
+                                },).toList(),
+                                onChanged: (newVal){
+                                  setState(() {
+                                    operation.pNiveau = newVal;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              DropdownButton(
+                                hint: new Text("Arme"),
+                                value: operation.selectedArme,
+                                items: ListArme.map((list){
+                                  return DropdownMenuItem(
+                                      child: Text(list.nomArme),
+                                      value: list
+                                  );
+                                },).toList(),
+                                onChanged: (newVal){
+                                  setState(() {
+                                    operation.selectedArme = newVal;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children : [
+                                DropdownButton(
+                                  hint: new Text("Raffinement"),
+                                  value: operation.selectedRaffinement,
+                                  items: ListRaffinement.map((list){
+                                    return DropdownMenuItem(
+                                        child: Text(list.toString()),
+                                        value: list
+                                    );
+                                  },).toList(),
+                                  onChanged: (newVal){
+                                    setState(() {
+                                      operation.selectedRaffinement = newVal;
+                                    });
+                                  },
+                                ),
+                                DropdownButton(
+                                  hint: new Text("Niveau"),
+                                  value: operation.aNiveau,
+                                  items: ListNiveau.map((list){
+                                    return DropdownMenuItem(
+                                        child: Text(list.nb_niveau.toString()),
+                                        value: list
+                                    );
+                                  },).toList(),
+                                  onChanged: (newVal){
+                                    setState(() {
+                                      operation.aNiveau = newVal;
+                                    });
+                                  },
+                                ),
+                              ]
+                          ),
+                          Row(
+                            mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+                            children: [
+                              DropdownButton(
+                                hint: new Text("Set 1"),
+                                value: operation.selectedPersonnage,
+                                items: ListPersonnage.map((list){
+                                  return DropdownMenuItem(
+                                      child: Text(list.nom),
+                                      value: list
+                                  );
+                                },).toList(),
+                                onChanged: (newVal){
+                                  setState(() {
+                                    operation.selectedPersonnage = newVal;
+                                  });
+                                },
+                              ),
+                              DropdownButton(
+                                hint: new Text("Set 2"),
+                                value: operation.selectedPersonnage,
+                                items: ListPersonnage.map((list){
+                                  return DropdownMenuItem(
+                                      child: Text(list.nom),
+                                      value: list
+                                  );
+                                },).toList(),
+                                onChanged: (newVal){
+                                  setState(() {
+                                    operation.selectedPersonnage = newVal;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          ElevatedButton(
+                              onPressed: (){
+                                if(operation.selectedPersonnage != null && operation.selectedArme != null
+                                    && operation.pNiveau != null &&  operation.pNiveau != null
+                                    && operation.selectedRaffinement != null) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/second',
+                                    arguments: operation,
+                                  );
+                                }else{
+                                  _showMyDialog();
+                                }
+                              },
+                              child: Text("Suivant")
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
-        )
+            ],
+          )
     );
   }
 
@@ -166,6 +237,40 @@ class _firstStepPageState extends State<firstStepPage> {
         for(Map<String, dynamic> uneDataJson in listJsonData) {
           Armes uneArmes = new Armes.fromJson(uneDataJson);
           ListArme.add(uneArmes);
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getNiveau() async {
+    final response = await http.get(BASE_URL+'/niveaux');
+    if (response.statusCode == 200) {
+      setState(() {
+        ListNiveau.clear();
+        listJsonData = json.decode(response.body);
+        for(Map<String, dynamic> uneDataJson in listJsonData) {
+          Niveau unNiveaux = new Niveau.fromJson(uneDataJson);
+          ListNiveau.add(unNiveaux);
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getRaffinement() async {
+    final response = await http.get(BASE_URL+'/custom/arme/type/statistique/raffinement');
+    if (response.statusCode == 200) {
+      setState(() {
+        ListRaffinement.clear();
+        listJsonData = json.decode(response.body);
+        for(dynamic uneDataJson in listJsonData) {
+          dynamic unRaffinement = uneDataJson["1"];
+          ListRaffinement.add(unRaffinement);
         }
       });
       return "success";
