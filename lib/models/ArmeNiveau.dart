@@ -9,6 +9,12 @@ class ArmeNiveau{
     return ArmeNiveau(json["arme_niveau_id"], json["atk"], json["stat_secondaire"]);
   }
 
+  Map<String, dynamic> toJson() => {
+    'arme_niveau_id':arme_niveau_id,
+    'atk':atk,
+    'stat_secondaire':stat_secondaire
+  };
+
   int get arme_niveau_id => _arme_niveau_id;
 
   set arme_niveau_id(int value) {

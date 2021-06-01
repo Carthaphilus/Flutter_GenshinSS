@@ -39,7 +39,20 @@ class _thirdStepPageState extends State<thirdStepPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Genshin SS')
+          title: Text('Genshin SS'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.save),
+              tooltip: 'Sauvegarder',
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/save',
+                  arguments: operation,
+                );
+              },
+            ),
+          ]
       ),
       body: ListView(
         children: [

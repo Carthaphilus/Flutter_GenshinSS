@@ -12,6 +12,7 @@ import 'package:genshin_android_app/models/PersonnageNiveau.dart';
 
 class calculateController{
 
+  String _NomProfil;
   Personnage _selectedPersonnage;
   Niveau _pNiveau;
   PersonnageNiveau _personnageNiveau;
@@ -40,6 +41,66 @@ class calculateController{
 
   calculateController();
 
+  factory calculateController.fromJson(Map<String, dynamic> json){
+    calculateController operation =  new calculateController();
+    operation.NomProfil = json['NomProfil'];
+    operation.selectedPersonnage = Personnage.fromJson(json['selectedPersonnage']);
+    operation.pNiveau = Niveau.fromJson(json['pNiveau']);
+    operation.personnageNiveau = PersonnageNiveau.fromJson(json['personnageNiveau']);
+    operation.selectedArme = Armes.fromJson(json['selectedArme']);
+    operation.selectedRaffinement = json['selectedRaffinement'];
+    operation.aNiveau = Niveau.fromJson(json['aNiveau']);
+    operation.armeNiveau = ArmeNiveau.fromJson(json['armeNiveau']);
+    operation.ascensionCompetence = json['ascensionCompetence'] ?? '1';
+    operation.pvMax = json['pvMax'] ?? '0';
+    operation.atkP = json['atkP'] ?? '0';
+    operation.atk = json['atk'] ?? '0';
+    operation.def = json['def'] ?? '0';
+    operation.me = json['me'] ?? '0';
+    operation.tc = json['tc'] ?? '0';
+    operation.dc = json['dc'] ?? '0';
+    operation.dPyro = json['dPyro'] ?? '0';
+    operation.dHydro = json['dHydro'] ?? '0';
+    operation.dDendro = json['dDendro'] ?? '0';
+    operation.dElectro = json['dElectro'] ?? '0';
+    operation.dAnemo = json['dAnemo'] ?? '0';
+    operation.dCryo = json['dCryo'] ?? '0';
+    operation.dGeo = json['dGeo'] ?? '0';
+    operation.dPhys = json['dPhys'] ?? '0';
+    operation.totAtk = json['totAtk'];
+    operation.totAtkCrit = json['totAtkCrit'];
+    return operation;
+  }
+
+  Map<String, dynamic> toJson() => {
+      'NomProfil' : _NomProfil,
+      'selectedPersonnage' : selectedPersonnage,
+      'pNiveau': pNiveau,
+      'personnageNiveau': personnageNiveau,
+      'selectedArme': selectedArme,
+      'selectedRaffinement': selectedRaffinement,
+      'aNiveau': aNiveau,
+      'armeNiveau': armeNiveau,
+      'ascensionCompetence': ascensionCompetence,
+      'pvMax': pvMax,
+      'atkP': atkP,
+      'atk': atk,
+      'def': def,
+      'me': me,
+      'tc': tc,
+      'dc': dc,
+      'dPyro': dPyro,
+      'dHydro': dHydro,
+      'dDendro': dDendro,
+      'dElectro': dElectro,
+      'dAnemo': dAnemo,
+      'dCryo': dCryo,
+      'dGeo': dGeo,
+      'dPhys': dPhys,
+      'totAtk': totAtk,
+      'totAtkCrit': totAtkCrit
+  };
+
 
   int Calculstat(Competences uneCompetence){
     RegExp regExp = new RegExp(r'\d+\.?\d?');
@@ -59,6 +120,13 @@ class calculateController{
 
   String resumeData(){
     return selectedPersonnage.nom + " ("+ pNiveau.nb_niveau.toString()+")"+ " | "+ selectedArme.nomArme + " ("+selectedRaffinement+":"+aNiveau.nb_niveau.toString()+")";
+  }
+
+
+  String get NomProfil => _NomProfil;
+
+  set NomProfil(String value) {
+    _NomProfil = value;
   }
 
   Personnage get selectedPersonnage => _selectedPersonnage;

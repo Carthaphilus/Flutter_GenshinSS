@@ -10,6 +10,11 @@ class ArmeType{
    return ArmeType(json["armeTypeId"], json["labelType"]);
  }
 
+ Map<String, dynamic> toJson() => {
+   'armeTypeId':armeTypeId,
+   'labelType':labelType
+ };
+
 
  int get armeTypeId => _armeTypeId;
 

@@ -23,6 +23,15 @@ class Personnage {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'personnageId':personnageId,
+    'nom':nom,
+    'rarete':rarete,
+    'image':image,
+   'armeType':armeType,
+    'element':element
+  };
+
   int get personnageId => _personnageId;
 
   set personnageId(int value) {

@@ -14,6 +14,13 @@ class Armes {
     return Armes(json["armeId"], json["nomArme"], json["imageArme"], json["rarete"]);
   }
 
+  Map<String, dynamic> toJson() => {
+    'armeId':armeId,
+    'nomArme':nomArme,
+    'imageArme':imageArme,
+    'rarete':rarete
+  };
+
   int get rarete => _rarete;
 
   set rarete(int value) {

@@ -15,6 +15,14 @@ class PersonnageNiveau{
     return PersonnageNiveau(json["id"], json["stat_ascension"], json["atk"], json["hp"], json["def"]);
   }
 
+  Map<String, dynamic> toJson() => {
+    'id':id,
+    'stat_ascension':stat_ascension,
+    'atk':atk,
+    'hp':hp,
+    'def':def
+  };
+
   int get def => _def;
 
   set def(int value) {

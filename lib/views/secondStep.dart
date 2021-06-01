@@ -39,6 +39,19 @@ class _secondStepPageState extends State<secondStepPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Genshin SS'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.save),
+                tooltip: 'Sauvegarder',
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/save',
+                    arguments: operation,
+                  );
+                },
+              ),
+            ]
         ),
         body:
         ListView(
@@ -73,6 +86,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               SizedBox(height: 20),
                               Text("Stats de base", style: TextStyle(fontSize: 20)),
                               TextFormField(
+                                initialValue: operation.pvMax ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -92,6 +106,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.atk ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -111,6 +126,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.atkP ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -130,6 +146,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.def ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.shield,size: 30),
@@ -149,6 +166,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.me ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -169,6 +187,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               Divider(),
                               Text("Stats avancées",style: TextStyle(fontSize: 20)),
                               TextFormField(
+                                initialValue: operation.tc ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -188,6 +207,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dc ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -208,6 +228,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               Divider(),
                               Text("Stats Elémentaires",style: TextStyle(fontSize: 20)),
                               TextFormField(
+                                initialValue: operation.dPyro ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -233,6 +254,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dHydro ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -257,6 +279,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dDendro ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -281,6 +304,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dElectro ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -306,6 +330,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dAnemo ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -330,6 +355,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dCryo ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -354,6 +380,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dGeo ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Image.asset(
@@ -378,6 +405,7 @@ class _secondStepPageState extends State<secondStepPage> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                initialValue: operation.dPhys ?? '',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.stacked_bar_chart,size: 30),
@@ -444,7 +472,6 @@ class _secondStepPageState extends State<secondStepPage> {
       setState(() {
         listJsonData = json.decode(response.body);
         for(Map<String, dynamic> uneDataJson in listJsonData){
-          print(uneDataJson);
           ArmeNiveau uneArmeNiveau = new ArmeNiveau.fromJson(uneDataJson);
           operation.armeNiveau = uneArmeNiveau;
         }

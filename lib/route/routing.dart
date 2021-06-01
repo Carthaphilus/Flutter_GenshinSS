@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/views/firstStep.dart';
+import 'package:genshin_android_app/views/savePage.dart';
 import 'package:genshin_android_app/views/secondStep.dart';
 import 'package:genshin_android_app/views/thirdStep.dart';
 
@@ -11,7 +12,11 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => firstStepPage());
+        return MaterialPageRoute(
+            builder: (_) => firstStepPage(
+              paramOperation: args,
+            ),
+        );
       case '/second':
       // Validation of correct data type
         return MaterialPageRoute(
@@ -25,6 +30,14 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) =>
               thirdStepPage(
+                paramOperation: args,
+              ),
+        );
+      case '/save':
+      // Validation of correct data type
+        return MaterialPageRoute(
+          builder: (_) =>
+              savePage(
                 paramOperation: args,
               ),
         );

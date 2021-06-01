@@ -16,6 +16,11 @@ class Elements {
     return Elements(json["elementId"], json["label"]);
   }
 
+  Map<String, dynamic> toJson() => {
+    'elementId':elementId,
+    'label':label
+  };
+
   static Future<List<dynamic>> getElements() async {
     final response = await http.get('${URLS.BASE_URL}/elements');
     if (response.statusCode == 200) {

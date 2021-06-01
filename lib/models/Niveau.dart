@@ -8,6 +8,11 @@ class Niveau{
     return Niveau(json["niveauId"], json["nbNiveau"]);
   }
 
+  Map<String, dynamic> toJson() => {
+    'niveauId':niveau_id,
+    'nbNiveau':nb_niveau
+  };
+
   int get niveau_id => _niveau_id;
 
   set niveau_id(int value) {
