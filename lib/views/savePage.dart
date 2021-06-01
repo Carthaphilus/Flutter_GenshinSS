@@ -101,7 +101,12 @@ class _savePageState extends State<savePage> {
                             ),
                           ],
                         ),
-                        if(operation.selectedPersonnage != null)
+                        if(operation.selectedPersonnage != null &&
+                            operation.selectedArme != null &&
+                            operation.selectedRaffinement != null &&
+                            operation.aNiveau != null &&
+                            operation.pNiveau != null
+                        )
                           Column(
                             children: [
                               SizedBox(height: 20),
