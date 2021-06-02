@@ -125,7 +125,7 @@ class _savePageState extends State<savePage> {
                                         fit: BoxFit.cover,
                                       ),
                                       title: Text(operation.resumeData()),
-                                      subtitle: Text('Set 1 | Set 2'),
+                                      subtitle: Text(operation.artefactSet1.label+' | '+operation.artefactSet2.label),
                                     ),
                                   ],
                                 ),

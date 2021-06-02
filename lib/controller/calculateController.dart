@@ -4,11 +4,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:genshin_android_app/models/ArmeNiveau.dart';
+import 'package:genshin_android_app/models/ArtefactStatEffet.dart';
 import 'package:genshin_android_app/models/Competences.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/models/Armes.dart';
 import 'package:genshin_android_app/models/Niveau.dart';
 import 'package:genshin_android_app/models/PersonnageNiveau.dart';
+import 'package:genshin_android_app/models/Artefact.dart';
 
 class calculateController{
 
@@ -20,6 +22,10 @@ class calculateController{
   String _selectedRaffinement;
   Niveau _aNiveau;
   ArmeNiveau _armeNiveau;
+  Artefact _artefactSet1;
+  Artefact _artefactSet2;
+  List<ArtefactStatEffet> _artefactStatEffet1 = [];
+  List<ArtefactStatEffet> _artefactStatEffet2 = [];
   String _ascensionCompetence;
   String _pvMax;
   String _atkP;
@@ -51,6 +57,10 @@ class calculateController{
     operation.selectedRaffinement = json['selectedRaffinement'];
     operation.aNiveau = Niveau.fromJson(json['aNiveau']);
     operation.armeNiveau = ArmeNiveau.fromJson(json['armeNiveau']);
+    operation.artefactSet1 = Artefact.fromJson(json['artefactSet1']);
+    operation.artefactSet2 = Artefact.fromJson(json['artefactSet2']);
+    operation.artefactStatEffet1 = ArtefactStatEffet.fromJsonTab(json['artefactStatEffet1']) ?? [];
+    operation.artefactStatEffet2 = ArtefactStatEffet.fromJsonTab(json['artefactStatEffet2']) ?? [];
     operation.ascensionCompetence = json['ascensionCompetence'] ?? '1';
     operation.pvMax = json['pvMax'] ?? '0';
     operation.atkP = json['atkP'] ?? '0';
@@ -73,32 +83,36 @@ class calculateController{
   }
 
   Map<String, dynamic> toJson() => {
-      'NomProfil' : _NomProfil,
-      'selectedPersonnage' : selectedPersonnage,
-      'pNiveau': pNiveau,
-      'personnageNiveau': personnageNiveau,
-      'selectedArme': selectedArme,
-      'selectedRaffinement': selectedRaffinement,
-      'aNiveau': aNiveau,
-      'armeNiveau': armeNiveau,
-      'ascensionCompetence': ascensionCompetence,
-      'pvMax': pvMax,
-      'atkP': atkP,
-      'atk': atk,
-      'def': def,
-      'me': me,
-      'tc': tc,
-      'dc': dc,
-      'dPyro': dPyro,
-      'dHydro': dHydro,
-      'dDendro': dDendro,
-      'dElectro': dElectro,
-      'dAnemo': dAnemo,
-      'dCryo': dCryo,
-      'dGeo': dGeo,
-      'dPhys': dPhys,
-      'totAtk': totAtk,
-      'totAtkCrit': totAtkCrit
+    'NomProfil' : _NomProfil,
+    'selectedPersonnage' : selectedPersonnage,
+    'pNiveau': pNiveau,
+    'personnageNiveau': personnageNiveau,
+    'selectedArme': selectedArme,
+    'selectedRaffinement': selectedRaffinement,
+    'aNiveau': aNiveau,
+    'armeNiveau': armeNiveau,
+    'artefactSet1' : artefactSet1,
+    'artefactSet2' : artefactSet2,
+    'artefactStatEffet1' : artefactStatEffet1,
+    'artefactStatEffet2' : artefactStatEffet2,
+    'ascensionCompetence': ascensionCompetence,
+    'pvMax': pvMax,
+    'atkP': atkP,
+    'atk': atk,
+    'def': def,
+    'me': me,
+    'tc': tc,
+    'dc': dc,
+    'dPyro': dPyro,
+    'dHydro': dHydro,
+    'dDendro': dDendro,
+    'dElectro': dElectro,
+    'dAnemo': dAnemo,
+    'dCryo': dCryo,
+    'dGeo': dGeo,
+    'dPhys': dPhys,
+    'totAtk': totAtk,
+    'totAtkCrit': totAtkCrit
   };
 
 
@@ -113,9 +127,135 @@ class calculateController{
     }
 
     ab = personnageNiveau.atk + armeNiveau.atk;
+    bonusSet(uneCompetence);
     attaque = ab * (1+((secondStatArme + double.parse(atkP)) / 100)) + int.parse(atk);
-    totAtk = attaque * ((double.parse(dPhys) / 100) + 1) + ((uneCompetence.pourcentage_degats / 100) + 1);
+    calculeElementCompetence(uneCompetence, attaque);
     totAtkCrit = totAtk *((double.parse(dc) / 100) + 1);
+  }
+
+  bonusSet(Competences uneCompetence) {
+    for (ArtefactStatEffet uneStat in artefactStatEffet1) {
+      switch (uneStat.type_statistiques_id) {
+        case 2:
+          double dbAtkP = double.parse(atkP) + uneStat.valeur.toDouble();
+          atkP = dbAtkP.toString();
+          break;
+        case 7:
+          double dbTc = double.parse(tc) + uneStat.valeur.toDouble();
+          tc = dbTc.toString();
+          break;
+        case 8:
+          double dbDc = double.parse(dc) + uneStat.valeur.toDouble();
+          dc = dbDc.toString();
+          break;
+        case 11:
+          double dbPhys = double.parse(dPhys) + uneStat.valeur.toDouble();
+          dPhys = dbPhys.toString();
+          break;
+        case 12:
+          dPyro = (double.parse(dPyro) + uneStat.valeur.toDouble()).toString();
+          dHydro = (double.parse(dHydro) + uneStat.valeur.toDouble()).toString();
+          dDendro = (double.parse(dDendro) + uneStat.valeur.toDouble()).toString();
+          dElectro = (double.parse(dElectro) + uneStat.valeur.toDouble()).toString();
+          dAnemo = (double.parse(dAnemo) + uneStat.valeur.toDouble()).toString();
+          dCryo = (double.parse(dCryo) + uneStat.valeur.toDouble()).toString();
+          dGeo = (double.parse(dGeo) + uneStat.valeur.toDouble()).toString();
+          break;
+        case 13:
+          if(uneCompetence.typeCompetence == 1 && uneCompetence.personnage_competence_label.contains(RegExp(r'(DGT \der? coup)'))) {
+            double dbComp = uneCompetence.pourcentage_degats + uneStat.valeur.toDouble();
+            uneCompetence.pourcentage_degats = dbComp;
+          }
+          break;
+        case 14:
+          if(uneCompetence.typeCompetence == 1 && (uneCompetence.personnage_competence_label.contains('DGT Tir visé') || uneCompetence.personnage_competence_label.contains('DGT Attaque chargée'))) {
+            double dbComp = uneCompetence.pourcentage_degats + uneStat.valeur.toDouble();
+            uneCompetence.pourcentage_degats = dbComp;
+          }
+          break;
+        case 17:
+          dPyro = (double.parse(dPyro) + uneStat.valeur.toDouble()).toString();
+          break;
+      }
+    }
+
+    for (ArtefactStatEffet uneStat in artefactStatEffet2) {
+      switch (uneStat.type_statistiques_id) {
+        case 2:
+          double dbAtkP = double.parse(atkP) + uneStat.valeur.toDouble();
+          atkP = dbAtkP.toString();
+          break;
+        case 7:
+          double dbTc = double.parse(tc) + uneStat.valeur.toDouble();
+          tc = dbTc.toString();
+          break;
+        case 8:
+          double dbDc = double.parse(dc) + uneStat.valeur.toDouble();
+          dc = dbDc.toString();
+          break;
+        case 11:
+          double dbPhys = double.parse(dPhys) + uneStat.valeur.toDouble();
+          dPhys = dbPhys.toString();
+          break;
+        case 12:
+          dPyro = (double.parse(dPyro) + uneStat.valeur.toDouble()).toString();
+          dHydro = (double.parse(dHydro) + uneStat.valeur.toDouble()).toString();
+          dDendro = (double.parse(dDendro) + uneStat.valeur.toDouble()).toString();
+          dElectro = (double.parse(dElectro) + uneStat.valeur.toDouble()).toString();
+          dAnemo = (double.parse(dAnemo) + uneStat.valeur.toDouble()).toString();
+          dCryo = (double.parse(dCryo) + uneStat.valeur.toDouble()).toString();
+          dGeo = (double.parse(dGeo) + uneStat.valeur.toDouble()).toString();
+          break;
+        case 13:
+          if(uneCompetence.typeCompetence == 1 && uneCompetence.personnage_competence_label.contains(RegExp(r'(DGT \der? coup)'))) {
+            double dbComp = uneCompetence.pourcentage_degats + uneStat.valeur.toDouble();
+            uneCompetence.pourcentage_degats = dbComp;
+          }
+          break;
+        case 14:
+          if(uneCompetence.typeCompetence == 1 && (uneCompetence.personnage_competence_label.contains('DGT Tir visé') || uneCompetence.personnage_competence_label.contains('DGT Attaque chargée'))) {
+            double dbComp = uneCompetence.pourcentage_degats + uneStat.valeur.toDouble();
+            uneCompetence.pourcentage_degats = dbComp;
+          }
+          break;
+        case 17:
+          dPyro = (double.parse(dPyro) + uneStat.valeur.toDouble()).toString();
+          break;
+      }
+    }
+  }
+
+  calculeElementCompetence(Competences uneCompetence, double attaque){
+    String elementComp;
+    switch (selectedPersonnage.element.elementId) {
+      case 1:
+        elementComp = dHydro;
+        break;
+      case 2:
+        elementComp = dHydro;
+        break;
+      case 3:
+        elementComp = dHydro;
+        break;
+      case 4:
+        elementComp = dHydro;
+        break;
+      case 5:
+        elementComp = dHydro;
+        break;
+      case 6:
+        elementComp = dHydro;
+        break;
+      case 7:
+        elementComp = dHydro;
+        break;
+    }
+
+    if(uneCompetence.typeCompetence == 1){
+      totAtk = attaque * ((double.parse(dPhys) / 100) + 1) + ((uneCompetence.pourcentage_degats / 100) + 1);
+    }else {
+      totAtk = attaque * ((double.parse(elementComp) / 100) + 1) + ((uneCompetence.pourcentage_degats / 100) + 1);
+    }
   }
 
   String resumeData(){
@@ -161,6 +301,19 @@ class calculateController{
     _selectedRaffinement = value;
   }
 
+
+  Artefact get artefactSet1 => _artefactSet1;
+
+  set artefactSet1(Artefact value) {
+    _artefactSet1 = value;
+  }
+
+
+  List<ArtefactStatEffet> get artefactStatEffet1 => _artefactStatEffet1;
+
+  set artefactStatEffet1(List<ArtefactStatEffet> value) {
+    _artefactStatEffet1 = value;
+  }
 
   String get ascensionCompetence => _ascensionCompetence;
 
@@ -280,5 +433,17 @@ class calculateController{
 
   set totAtk(double value) {
     _totAtk = value;
+  }
+
+  Artefact get artefactSet2 => _artefactSet2;
+
+  set artefactSet2(Artefact value) {
+    _artefactSet2 = value;
+  }
+
+  List<ArtefactStatEffet> get artefactStatEffet2 => _artefactStatEffet2;
+
+  set artefactStatEffet2(List<ArtefactStatEffet> value) {
+    _artefactStatEffet2 = value;
   }
 }

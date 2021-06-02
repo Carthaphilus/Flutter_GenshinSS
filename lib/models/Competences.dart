@@ -1,6 +1,7 @@
 class Competences {
 
   int _competence_id;
+  int _typeCompetence;
   String _personnage_competence_label;
   int _ascension;
   double _pourcentage_degats;
@@ -9,6 +10,13 @@ class Competences {
 
   factory Competences.fromJson(Map<String, dynamic> json){
     return Competences(json["competenceId"], json["personnageCompetenceLabel"], json["ascension"], json["pourcentageDegats"].toDouble());
+  }
+
+
+  int get typeCompetence => _typeCompetence;
+
+  set typeCompetence(int value) {
+    _typeCompetence = value;
   }
 
   double get pourcentage_degats => _pourcentage_degats;

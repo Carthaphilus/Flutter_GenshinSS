@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/models/Armes.dart';
+import 'package:genshin_android_app/models/Artefact.dart';
 import 'package:genshin_android_app/models/Niveau.dart';
 
 import 'package:genshin_android_app/globals.dart';
@@ -25,6 +26,8 @@ class _firstStepPageState extends State<firstStepPage> {
   List<Armes> ListArme = [];
   List<dynamic> ListRaffinement = [];
   List<Niveau> ListNiveau = [];
+  List<Artefact> ListArtefact = [];
+  List<Artefact> ListArtefact2 = [];
   List<dynamic> listJsonData;
 
   @override
@@ -35,6 +38,7 @@ class _firstStepPageState extends State<firstStepPage> {
     getPersonnages();
     getNiveau();
     getRaffinement();
+    getArtefact();
   }
 
   @override
@@ -172,31 +176,37 @@ class _firstStepPageState extends State<firstStepPage> {
                           children: [
                             DropdownButton(
                               hint: new Text("Set 1"),
-                              value: operation.selectedPersonnage,
-                              items: ListPersonnage.map((list){
+                              value: operation.artefactSet1,
+                              items: ListArtefact.map((list){
                                 return DropdownMenuItem(
-                                    child: Text(list.nom),
+                                    child: Text(list.label),
                                     value: list
                                 );
                               },).toList(),
                               onChanged: (newVal){
                                 setState(() {
-                                  operation.selectedPersonnage = newVal;
+                                  operation.artefactSet1 = newVal;
+                                  getArtefact2(operation.artefactSet1.id, operation.artefactSet1.label);
                                 });
                               },
                             ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
+                          children: [
                             DropdownButton(
                               hint: new Text("Set 2"),
-                              value: operation.selectedPersonnage,
-                              items: ListPersonnage.map((list){
+                              value: operation.artefactSet2,
+                              items: ListArtefact2.map((list){
                                 return DropdownMenuItem(
-                                    child: Text(list.nom),
+                                    child: Text(list.label),
                                     value: list
                                 );
                               },).toList(),
                               onChanged: (newVal){
                                 setState(() {
-                                  operation.selectedPersonnage = newVal;
+                                  operation.artefactSet2 = newVal;
                                 });
                               },
                             ),
@@ -288,6 +298,40 @@ class _firstStepPageState extends State<firstStepPage> {
         for(dynamic uneDataJson in listJsonData) {
           dynamic unRaffinement = uneDataJson["1"];
           ListRaffinement.add(unRaffinement);
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getArtefact() async {
+    final response = await http.get(BASE_URL+'/custom/artefact/');
+    if (response.statusCode == 200) {
+      setState(() {
+        ListArtefact.clear();
+        listJsonData = json.decode(response.body);
+        for(dynamic uneDataJson in listJsonData) {
+          Artefact unSetArt = new Artefact.fromJson(uneDataJson);
+          ListArtefact.add(unSetArt);
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getArtefact2(int artefactid, String labelartefact) async {
+    final response = await http.get(BASE_URL+'/custom/artefact/'+artefactid.toString()+'/'+labelartefact);
+    if (response.statusCode == 200) {
+      setState(() {
+        ListArtefact2.clear();
+        listJsonData = json.decode(response.body);
+        for(dynamic uneDataJson in listJsonData) {
+          Artefact unSetArt = new Artefact.fromJson(uneDataJson);
+          ListArtefact2.add(unSetArt);
         }
       });
       return "success";

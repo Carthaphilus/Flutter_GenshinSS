@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:genshin_android_app/models/ArmeNiveau.dart';
+import 'package:genshin_android_app/models/ArtefactStatEffet.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -31,6 +32,8 @@ class _secondStepPageState extends State<secondStepPage> {
     operation = widget.paramOperation;
     getPersonnageNiveau(operation.selectedPersonnage.personnageId.toString(), operation.pNiveau.niveau_id.toString());
     getArmeNiveau(operation.selectedArme.armeId.toString(), operation.aNiveau.niveau_id.toString());
+    getSetEffect(operation.artefactSet1.id, operation.artefactStatEffet1);
+    getSetEffect(operation.artefactSet2.id, operation.artefactStatEffet2);
   }
 
   @override
@@ -78,7 +81,7 @@ class _secondStepPageState extends State<secondStepPage> {
                                         fit: BoxFit.cover,
                                       ),
                                       title: Text(operation.resumeData()),
-                                      subtitle: Text('Set 1 | Set 2'),
+                                      subtitle: Text(operation.artefactSet1.label+' | '+operation.artefactSet2.label),
                                     ),
                                   ],
                                 ),
@@ -474,6 +477,22 @@ class _secondStepPageState extends State<secondStepPage> {
         for(Map<String, dynamic> uneDataJson in listJsonData){
           ArmeNiveau uneArmeNiveau = new ArmeNiveau.fromJson(uneDataJson);
           operation.armeNiveau = uneArmeNiveau;
+        }
+      });
+      return "success";
+    } else {
+      return null;
+    }
+  }
+
+  Future getSetEffect(int artefactid, List<ArtefactStatEffet> unartefactStatEffet) async {
+    final response = await http.get(BASE_URL+"/custom/artefact/stat/effet/"+artefactid.toString());
+    if (response.statusCode == 200) {
+      setState(() {
+        listJsonData = json.decode(response.body);
+        for(Map<String, dynamic> uneDataJson in listJsonData){
+          ArtefactStatEffet uneStatArtefactEffet = new ArtefactStatEffet.fromJson(uneDataJson);
+          unartefactStatEffet.add(uneStatArtefactEffet);
         }
       });
       return "success";

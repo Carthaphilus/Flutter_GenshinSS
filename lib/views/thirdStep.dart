@@ -22,6 +22,8 @@ class _thirdStepPageState extends State<thirdStepPage> {
 
   calculateController operation;
   List<DataRow> RowAtkNormale = [];
+  List<DataRow> RowCompetenceElementaire = [];
+  List<DataRow> RowDechainementElementaire = [];
   List<dynamic> listJsonData;
 
   @override
@@ -30,8 +32,8 @@ class _thirdStepPageState extends State<thirdStepPage> {
     super.initState();
     operation = widget.paramOperation;
     getCompetence(operation.selectedPersonnage.personnageId.toString(), "1", "1", RowAtkNormale);
-    /*getCompetence(operation.selectedPersonnage.personnageId.toString(), "2", "1", ListCompetenceElementaire);
-    getCompetence(operation.selectedPersonnage.personnageId.toString(), "3", "1", ListDechainementElementaire);*/
+    getCompetence(operation.selectedPersonnage.personnageId.toString(), "2", "1", RowCompetenceElementaire);
+    getCompetence(operation.selectedPersonnage.personnageId.toString(), "3", "1", RowDechainementElementaire);
   }
 
 
@@ -75,7 +77,7 @@ class _thirdStepPageState extends State<thirdStepPage> {
                                   fit: BoxFit.cover,
                                 ),
                                 title: Text(operation.resumeData()),
-                                subtitle: Text('Set 1 | Set 2'),
+                                subtitle: Text(operation.artefactSet1.label+' | '+operation.artefactSet2.label),
                               ),
                             ],
                           ),
@@ -104,7 +106,57 @@ class _thirdStepPageState extends State<thirdStepPage> {
                               DataColumn(label: Text("Critique"))
                             ],
                             rows: RowAtkNormale
-                        )
+                        ),
+                        SizedBox(height: 20),
+                        Text("Dgt Compétence élementaire", style: TextStyle(fontSize: 20)),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Ascension',
+                            labelText: 'Ascension *',
+                          ),
+                          initialValue: "1",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          onChanged: (String value) {
+                            if(numberValidator(value)){
+                              getCompetence(operation.selectedPersonnage.personnageId.toString(), "2" ,value, RowCompetenceElementaire);
+                            }
+                          },
+                        ),
+                        DataTable(
+                            columns: [
+                              DataColumn(label: Text("Coup")),
+                              DataColumn(label: Text("Basique")),
+                              DataColumn(label: Text("Critique"))
+                            ],
+                            rows: RowCompetenceElementaire
+                        ),
+                        SizedBox(height: 20),
+                        Text("Dgt Déchainement élementaire", style: TextStyle(fontSize: 20)),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Ascension',
+                            labelText: 'Ascension *',
+                          ),
+                          initialValue: "1",
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          onChanged: (String value) {
+                            if(numberValidator(value)){
+                              getCompetence(operation.selectedPersonnage.personnageId.toString(), "3" ,value, RowDechainementElementaire);
+                            }
+                          },
+                        ),
+                        DataTable(
+                            columns: [
+                              DataColumn(label: Text("Coup")),
+                              DataColumn(label: Text("Basique")),
+                              DataColumn(label: Text("Critique"))
+                            ],
+                            rows: RowDechainementElementaire
+                        ),
                       ],
                     )
                 )
@@ -124,6 +176,7 @@ class _thirdStepPageState extends State<thirdStepPage> {
         listJsonData = json.decode(response.body);
         for(Map<String, dynamic> uneDataJson in listJsonData) {
           Competences uneCompetence = new Competences.fromJson(uneDataJson);
+          uneCompetence.typeCompetence = int.parse(idTypeCompetence);
           operation.Calculstat(uneCompetence);
           ListRow.add(
               DataRow(
