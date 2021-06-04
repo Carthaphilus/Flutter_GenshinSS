@@ -5,7 +5,9 @@ import 'dart:convert';
 import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
+/**
+ * Sur cette page nous pouvons enregistré ou sélectionné un profil
+ */
 class savePage extends StatefulWidget {
 
   calculateController paramOperation;
@@ -32,9 +34,6 @@ class _savePageState extends State<savePage> {
     // TODO: implement initState
     super.initState();
     operation = widget.paramOperation;
-    if(operation.selectedPersonnage != null){
-      visible = true;
-    }
     getAllDataSave();
   }
 
@@ -183,6 +182,7 @@ class _savePageState extends State<savePage> {
     );
   }
 
+  //Methode permetant de reucpérè un profil enregistré
   Future getDataSave(key) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -190,6 +190,7 @@ class _savePageState extends State<savePage> {
     });
   }
 
+  //Methode pouvant récupéré les profils à partir des clé
   Future getAllDataSave() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     Set<String> DataSaveKey = prefs.getKeys();
@@ -204,16 +205,19 @@ class _savePageState extends State<savePage> {
     });
   }
 
+  //Methode permettant d'enregistré un profil à l'aide d'un clé qui sont nom
   setDataSave(key,data) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key,data);
   }
 
+  //Methode permettant de supprimé un profil à l'aide de sa clé
   delDataSave(key) async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(key);
   }
 
+  //Methode permettant de supprimer l'entièreté des profils stocker
   clearDataSave() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();

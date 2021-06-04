@@ -11,6 +11,9 @@ import 'package:genshin_android_app/models/ArmeNiveau.dart';
 import 'package:genshin_android_app/models/PersonnageNiveau.dart';
 import 'package:genshin_android_app/globals.dart';
 
+/**
+ * Sur cette page nous retrouvons l'enssemble des champs pour le calcule des statistiques
+ */
 class secondStepPage extends StatefulWidget {
   calculateController paramOperation;
   secondStepPage({Key key, this.paramOperation}) : super(key: key);
@@ -21,15 +24,17 @@ class secondStepPage extends StatefulWidget {
 
 class _secondStepPageState extends State<secondStepPage> {
 
-  final _formKey = GlobalKey<FormState>();
-  calculateController operation;
-  List<dynamic> listJsonData;
+  final _formKey = GlobalKey<FormState>(); //Attribut p
+  calculateController operation; //Attribut pour stocker et utilisé la classe calculateController
+  List<dynamic> listJsonData; //Liste utilisé lors de la réupération des données au format JSON via l'API
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    operation = widget.paramOperation;
+    operation = widget.paramOperation; //Recuperation de l'objet calculateController de la fenetre précédente
+
+    //Envoie des methode de recuperation des données
     getPersonnageNiveau(operation.selectedPersonnage.personnageId.toString(), operation.pNiveau.niveau_id.toString());
     getArmeNiveau(operation.selectedArme.armeId.toString(), operation.aNiveau.niveau_id.toString());
     getSetEffect(operation.artefactSet1.id, operation.artefactStatEffet1);
@@ -453,6 +458,7 @@ class _secondStepPageState extends State<secondStepPage> {
     );
   }
 
+  //Recuperation des statistique lié au niveau du personnage
   Future getPersonnageNiveau(String personnageId, String niveauId) async {
     final response = await http.get(BASE_URL+'/personnage_niveaus?personnage='+personnageId+"&niveau="+niveauId);
     if (response.statusCode == 200) {
@@ -469,6 +475,7 @@ class _secondStepPageState extends State<secondStepPage> {
     }
   }
 
+  //Recuperation des statitstique lié au niveau de l'arme
   Future getArmeNiveau(String armeId, String niveauId) async {
     final response = await http.get(BASE_URL+'/arme_niveaus?arme='+armeId+"&niveau="+niveauId);
     if (response.statusCode == 200) {
@@ -485,6 +492,7 @@ class _secondStepPageState extends State<secondStepPage> {
     }
   }
 
+  //Recuperation des effets des artefact en fonction des sets d'artefacts choisie
   Future getSetEffect(int artefactid, List<ArtefactStatEffet> unartefactStatEffet) async {
     final response = await http.get(BASE_URL+"/custom/artefact/stat/effet/"+artefactid.toString());
     if (response.statusCode == 200) {
@@ -501,6 +509,7 @@ class _secondStepPageState extends State<secondStepPage> {
     }
   }
 
+  //Fonction permettant la validation des champs
   String numberValidator(String value) {
     if(value == null) {
       return null;

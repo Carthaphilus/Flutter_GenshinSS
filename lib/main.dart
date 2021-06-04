@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'Georgia',
         primarySwatch: Colors.amber,
         dividerTheme:  DividerThemeData(
           space: 50,

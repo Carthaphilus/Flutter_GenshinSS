@@ -10,7 +10,9 @@ import 'package:genshin_android_app/models/Niveau.dart';
 
 import 'package:genshin_android_app/globals.dart';
 
-
+/**
+ * Sur cette page nous retrouvons la sélection du personnage, de l'armes, du raffinement, des niveaux et des artefacts
+ */
 class firstStepPage extends StatefulWidget {
   calculateController paramOperation;
   firstStepPage({Key key, this.paramOperation}) : super(key: key);
@@ -21,7 +23,9 @@ class firstStepPage extends StatefulWidget {
 
 class _firstStepPageState extends State<firstStepPage> {
 
-  calculateController operation;
+  calculateController operation; //Attribut pour utilisé la classe controller operation
+
+  //Enssemble des liste pour gerer les données des selecteurs
   List<Personnage> ListPersonnage = [];
   List<Armes> ListArme = [];
   List<dynamic> ListRaffinement = [];
@@ -34,7 +38,11 @@ class _firstStepPageState extends State<firstStepPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    //Recuperation on instanciation de l'objet calculateController
     operation = widget.paramOperation ?? new calculateController();
+
+    //Lancement des methodes pour la recuperation des données via l'API
     getPersonnages();
     getNiveau();
     getRaffinement();
@@ -70,6 +78,7 @@ class _firstStepPageState extends State<firstStepPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        //Affichage de l'image
                         ClipRRect(
                             borderRadius: BorderRadius.circular(15.0),
                             child: Image.asset(
@@ -239,6 +248,7 @@ class _firstStepPageState extends State<firstStepPage> {
     );
   }
 
+  //Methode pour récupéré les personnage via l'API
   Future getPersonnages() async {
     final response = await http.get(BASE_URL+'/personnages');
     if (response.statusCode == 200) {
@@ -255,6 +265,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Methode pour récupéré l'arme en focntion du type d'arme du personnage
   Future getArmes(String id) async {
     final response = await http.get(BASE_URL+'/armes?armeType='+id);
     if (response.statusCode == 200) {
@@ -272,6 +283,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Methode pour récupéré le niveau
   Future getNiveau() async {
     final response = await http.get(BASE_URL+'/niveaux');
     if (response.statusCode == 200) {
@@ -289,6 +301,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Methode pour récupéré les valeurs des raffinement
   Future getRaffinement() async {
     final response = await http.get(BASE_URL+'/custom/arme/type/statistique/raffinement');
     if (response.statusCode == 200) {
@@ -306,6 +319,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Recupération des artefacts ayant l'effet de deux piece
   Future getArtefact() async {
     final response = await http.get(BASE_URL+'/custom/artefact/');
     if (response.statusCode == 200) {
@@ -323,6 +337,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Recuperation des artefactes ayant l'effet de deux piece + l'artefact de quatre piece de l'artefact sélectionné
   Future getArtefact2(int artefactid, String labelartefact) async {
     final response = await http.get(BASE_URL+'/custom/artefact/'+artefactid.toString()+'/'+labelartefact);
     if (response.statusCode == 200) {
@@ -340,6 +355,7 @@ class _firstStepPageState extends State<firstStepPage> {
     }
   }
 
+  //Methode permettant l'affichage d'une boite de dialogue dans le cas ou les sélecteur ne sont pas sélectionné
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,

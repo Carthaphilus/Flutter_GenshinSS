@@ -14,6 +14,7 @@ import 'package:genshin_android_app/models/Artefact.dart';
 
 class calculateController{
 
+  //Enssemble des attribut necessaire au calcule
   String _NomProfil;
   Personnage _selectedPersonnage;
   Niveau _pNiveau;
@@ -45,8 +46,9 @@ class calculateController{
   double _totAtk;
   double _totAtkCrit;
 
-  calculateController();
+  calculateController(); //Constructeur
 
+  //Methode permetant la conversion d'une chaine de caractère Json en objet calculateController
   factory calculateController.fromJson(Map<String, dynamic> json){
     calculateController operation =  new calculateController();
     operation.NomProfil = json['NomProfil'];
@@ -82,6 +84,7 @@ class calculateController{
     return operation;
   }
 
+  //Methode permettant la conversion d'un objet calculateController en chaine de caractère Json
   Map<String, dynamic> toJson() => {
     'NomProfil' : _NomProfil,
     'selectedPersonnage' : selectedPersonnage,
@@ -115,7 +118,7 @@ class calculateController{
     'totAtkCrit': totAtkCrit
   };
 
-
+  //Methode regoupant l'enssemble des calculs des statistiques pour la competences passé en parametre
   int Calculstat(Competences uneCompetence){
     RegExp regExp = new RegExp(r'\d+\.?\d?');
     double secondStatArme = 0;
@@ -133,8 +136,11 @@ class calculateController{
     totAtkCrit = totAtk *((double.parse(dc) / 100) + 1);
   }
 
+  //Methode permettant d'inclure l'effet de set d'artefact au calcule
   bonusSet(Competences uneCompetence) {
+    //Parcour les effets
     for (ArtefactStatEffet uneStat in artefactStatEffet1) {
+      //En fonction de son type on le calcule avec la bonne statistique
       switch (uneStat.type_statistiques_id) {
         case 2:
           double dbAtkP = double.parse(atkP) + uneStat.valeur.toDouble();
@@ -225,6 +231,7 @@ class calculateController{
     }
   }
 
+  //Methode pour calculé l'attaque en fonction de l'element du personnage et de la competence
   calculeElementCompetence(Competences uneCompetence, double attaque){
     String elementComp;
     switch (selectedPersonnage.element.elementId) {
@@ -258,10 +265,12 @@ class calculateController{
     }
   }
 
+  //Methode resumant le nom du personnage, son niveau, l'arme choisie, son raffinement et son niveau sous forme de chaine de caractère
   String resumeData(){
     return selectedPersonnage.nom + " ("+ pNiveau.nb_niveau.toString()+")"+ " | "+ selectedArme.nomArme + " ("+selectedRaffinement+":"+aNiveau.nb_niveau.toString()+")";
   }
 
+  //Methode accesseur et getteur
 
   String get NomProfil => _NomProfil;
 

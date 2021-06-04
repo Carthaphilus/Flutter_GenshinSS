@@ -8,7 +8,9 @@ import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:genshin_android_app/models/Competences.dart';
 import 'package:genshin_android_app/globals.dart';
 
-
+/**
+ * Sur cette page nous retrouvons l'enssemble des tableaux avec les données calculé
+ */
 class thirdStepPage extends StatefulWidget {
 
   calculateController paramOperation;
@@ -20,7 +22,9 @@ class thirdStepPage extends StatefulWidget {
 
 class _thirdStepPageState extends State<thirdStepPage> {
 
-  calculateController operation;
+  calculateController operation; //Attribut pour récupéré l'objet calculateController
+
+  //Attribut stockant la liste des dataRow pour chaque type de compétence
   List<DataRow> RowAtkNormale = [];
   List<DataRow> RowCompetenceElementaire = [];
   List<DataRow> RowDechainementElementaire = [];
@@ -30,7 +34,9 @@ class _thirdStepPageState extends State<thirdStepPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    operation = widget.paramOperation;
+    operation = widget.paramOperation; //Recuperation de l'objet calculateController
+
+    //Envoie des methodes recuperant les competances en fonction du personnage, de son type et insertion dans la liste de DataRow
     getCompetence(operation.selectedPersonnage.personnageId.toString(), "1", "1", RowAtkNormale);
     getCompetence(operation.selectedPersonnage.personnageId.toString(), "2", "1", RowCompetenceElementaire);
     getCompetence(operation.selectedPersonnage.personnageId.toString(), "3", "1", RowDechainementElementaire);
@@ -168,6 +174,7 @@ class _thirdStepPageState extends State<thirdStepPage> {
     );
   }
 
+  //Methode pour recupere les compétences en focntion du personnage, du type et insertion dans sa Liste de dataRow après ca création
   Future getCompetence(String idPersonnage, String idTypeCompetence ,String idAscencion, List<DataRow> ListRow) async {
     final response = await http.get(BASE_URL+'/competences?personnage='+idPersonnage+'&typeCompetence='+idTypeCompetence+'&ascension='+idAscencion);
     if (response.statusCode == 200) {
@@ -201,6 +208,7 @@ class _thirdStepPageState extends State<thirdStepPage> {
     }
   }
 
+  //Fonction pour valider les champ de type numerique
   bool numberValidator(String value) {
     if(value == null) {
       return false;

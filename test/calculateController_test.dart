@@ -8,6 +8,8 @@ import 'package:genshin_android_app/models/Niveau.dart';
 import 'package:genshin_android_app/models/Personnage.dart';
 import 'package:genshin_android_app/controller/calculateController.dart';
 import 'package:genshin_android_app/models/PersonnageNiveau.dart';
+import 'package:genshin_android_app/models/Artefact.dart';
+import 'package:genshin_android_app/models/ArtefactStatEffet.dart';
 
 void main(){
 
@@ -21,6 +23,10 @@ void main(){
   operation.aNiveau  = new Niveau(1, 1);
   operation.personnageNiveau = new PersonnageNiveau(7, '-', 179, 9060, 671);
   operation.armeNiveau = new ArmeNiveau(14, 41, "13.3% Recharge d\'énergie");
+  operation.artefactSet1 = new Artefact(21,2,"Rideau du Gladiateur","Augmente l'ATQ de 18 %");
+  operation.artefactSet2 =  new Artefact(22,4,"Rideau du Gladiateur","Augmente les DGT infligés par les attaques normales de 35 % lorsque ce set d'artéfacts est équipé par les personnages maniant une épée à une ou deux mains ou une arme d'hast.");
+  operation.artefactStatEffet1 = [new ArtefactStatEffet(1, 18, 2)];
+  operation.artefactStatEffet2 = [new ArtefactStatEffet(2, 35, 13)];
 
   Competences competence1 = new Competences(57, 'DGT 1er coup', 1, 46.6);
   Competences competence2 = new Competences(59, 'DGT 2e coup', 1, 47.6);
@@ -53,8 +59,7 @@ void main(){
 
   test('Teste du calcule des degats', (){
     operation.Calculstat(competence1);
-    expect(operation.totAtk, 221.466);
-    expect(operation.totAtkCrit, 221.466);
-    
+    expect(operation.totAtk, 261.066);
+    expect(operation.totAtkCrit, 261.066);
   });
 }
